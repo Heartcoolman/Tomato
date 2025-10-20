@@ -361,6 +361,138 @@ struct TimerView: View {
     }
 }
 
+struct QuickActionButton: View {
+    let icon: String
+    let title: String
+    let isActive: Bool
+    let action: () -> Void
+    
+    @State private var isPressed = false
+    @State private var pulseScale: CGFloat = 1.0
+    
+    var body: some View {
+        Button(action: action) {
+            VStack(spacing: 4) {
+                Image(systemName: icon)
+                    .font(.system(size: 16, weight: .medium))
+                    .foregroundColor(isActive ? .white : .darkGray)
+                    .frame(width: 32, height: 32)
+                    .background(
+                        Circle()
+                            .fill(isActive ? Color.tomatoRed : Color.gray.opacity(0.1))
+                            .scaleEffect(pulseScale)
+                            .shadow(color: isActive ? Color.tomatoRed.opacity(0.3) : Color.clear, radius: 4, x: 0, y: 2)
+                    )
+                
+                Text(title)
+                    .font(.system(size: 10, weight: .medium))
+                    .foregroundColor(isActive ? .tomatoRed : .darkGray.opacity(0.7))
+            }
+        }
+        .buttonStyle(PlainButtonStyle())
+        .scaleEffect(isPressed ? 0.95 : 1.0)
+        .onLongPressGesture(minimumDuration: 0, maximumDistance: .infinity, pressing: { pressing in
+            withAnimation(.easeInOut(duration: 0.1)) {
+                isPressed = pressing
+                if pressing {
+                    pulseScale = 1.1
+                } else {
+                    pulseScale = 1.0
+                }
+            }
+        }, perform: {})
+        .onAppear {
+            if isActive {
+                withAnimation(.easeInOut(duration: 1.5).repeatForever(autoreverses: true)) {
+                    pulseScale = 1.05
+                }
+            }
+        }
+        .onChange(of: isActive) { _, newIsActive in
+            if newIsActive {
+                withAnimation(.easeInOut(duration: 1.5).repeatForever(autoreverses: true)) {
+                    pulseScale = 1.05
+                }
+            } else {
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    pulseScale = 1.0
+                }
+            }
+        }
+        .accessibilityLabel(title)
+        .accessibilityValue(isActive ? "激活" : "未激活")
+    }
+}
+
+struct AnimatedToggleRow: View {
+    let icon: String
+    let title: String
+    @Binding var isOn: Bool
+    let color: Color
+    
+    @State private var isPressed = false
+    @State private var glowScale: CGFloat = 1.0
+    
+    var body: some View {
+        HStack(spacing: 12) {
+            Image(systemName: icon)
+                .foregroundColor(color)
+                .frame(width: 24)
+                .scaleEffect(glowScale)
+                .animation(.easeInOut(duration: 0.3), value: glowScale)
+            
+            Text(title)
+                .foregroundColor(.darkGray)
+            
+            Spacer()
+            
+            // 自定义开关
+            Toggle("", isOn: $isOn)
+                .labelsHidden()
+                .tint(color)
+                .scaleEffect(isPressed ? 0.95 : 1.0)
+                .animation(.easeInOut(duration: 0.1), value: isPressed)
+        }
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 8)
+                .fill(isOn ? color.opacity(0.05) : Color.clear)
+                .animation(.easeInOut(duration: 0.3), value: isOn)
+        )
+        .onTapGesture {
+            withAnimation(.easeInOut(duration: 0.1)) {
+                isPressed = true
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                withAnimation(.easeInOut(duration: 0.1)) {
+                    isPressed = false
+                }
+            }
+            
+            isOn.toggle()
+        }
+        .onLongPressGesture(minimumDuration: 0, maximumDistance: .infinity, pressing: { pressing in
+            withAnimation(.easeInOut(duration: 0.1)) {
+                isPressed = pressing
+            }
+        }, perform: {})
+        .onChange(of: isOn) { _, newValue in
+            if newValue {
+                withAnimation(.easeInOut(duration: 0.3).repeatForever(autoreverses: true)) {
+                    glowScale = 1.1
+                }
+            } else {
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    glowScale = 1.0
+                }
+            }
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(title): \(isOn ? "开启" : "关闭")")
+    }
+}
+
 struct ToggleRow: View {
     let icon: String
     let title: String
@@ -770,138 +902,6 @@ struct ModeButton: View {
             return "cup.and.saucer.fill"
         case .longBreak:
             return "couch.fill"
-        }
-    }
-    
-    struct AnimatedToggleRow: View {
-        let icon: String
-        let title: String
-        @Binding var isOn: Bool
-        let color: Color
-        
-        @State private var isPressed = false
-        @State private var glowScale: CGFloat = 1.0
-        
-        var body: some View {
-            HStack(spacing: 12) {
-                Image(systemName: icon)
-                    .foregroundColor(color)
-                    .frame(width: 24)
-                    .scaleEffect(glowScale)
-                    .animation(.easeInOut(duration: 0.3), value: glowScale)
-                
-                Text(title)
-                    .foregroundColor(.darkGray)
-                
-                Spacer()
-                
-                // 自定义开关
-                Toggle("", isOn: $isOn)
-                    .labelsHidden()
-                    .tint(color)
-                    .scaleEffect(isPressed ? 0.95 : 1.0)
-                    .animation(.easeInOut(duration: 0.1), value: isPressed)
-            }
-            .padding()
-            .background(
-                RoundedRectangle(cornerRadius: 8)
-                    .fill(isOn ? color.opacity(0.05) : Color.clear)
-                    .animation(.easeInOut(duration: 0.3), value: isOn)
-            )
-            .onTapGesture {
-                withAnimation(.easeInOut(duration: 0.1)) {
-                    isPressed = true
-                }
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    withAnimation(.easeInOut(duration: 0.1)) {
-                        isPressed = false
-                    }
-                }
-                
-                isOn.toggle()
-            }
-            .onLongPressGesture(minimumDuration: 0, maximumDistance: .infinity, pressing: { pressing in
-                withAnimation(.easeInOut(duration: 0.1)) {
-                    isPressed = pressing
-                }
-            }, perform: {})
-            .onChange(of: isOn) { _, newValue in
-                if newValue {
-                    withAnimation(.easeInOut(duration: 0.3).repeatForever(autoreverses: true)) {
-                        glowScale = 1.1
-                    }
-                } else {
-                    withAnimation(.easeInOut(duration: 0.3)) {
-                        glowScale = 1.0
-                    }
-                }
-            }
-            .accessibilityElement(children: .combine)
-            .accessibilityLabel("\(title): \(isOn ? "开启" : "关闭")")
-        }
-    }
-    
-    struct QuickActionButton: View {
-        let icon: String
-        let title: String
-        let isActive: Bool
-        let action: () -> Void
-        
-        @State private var isPressed = false
-        @State private var pulseScale: CGFloat = 1.0
-        
-        var body: some View {
-            Button(action: action) {
-                VStack(spacing: 4) {
-                    Image(systemName: icon)
-                        .font(.system(size: 16, weight: .medium))
-                        .foregroundColor(isActive ? .white : .darkGray)
-                        .frame(width: 32, height: 32)
-                        .background(
-                            Circle()
-                                .fill(isActive ? Color.tomatoRed : Color.gray.opacity(0.1))
-                                .scaleEffect(pulseScale)
-                                .shadow(color: isActive ? Color.tomatoRed.opacity(0.3) : Color.clear, radius: 4, x: 0, y: 2)
-                        )
-                    
-                    Text(title)
-                        .font(.system(size: 10, weight: .medium))
-                        .foregroundColor(isActive ? .tomatoRed : .darkGray.opacity(0.7))
-                }
-            }
-            .buttonStyle(PlainButtonStyle())
-            .scaleEffect(isPressed ? 0.95 : 1.0)
-            .onLongPressGesture(minimumDuration: 0, maximumDistance: .infinity, pressing: { pressing in
-                withAnimation(.easeInOut(duration: 0.1)) {
-                    isPressed = pressing
-                    if pressing {
-                        pulseScale = 1.1
-                    } else {
-                        pulseScale = 1.0
-                    }
-                }
-            }, perform: {})
-            .onAppear {
-                if isActive {
-                    withAnimation(.easeInOut(duration: 1.5).repeatForever(autoreverses: true)) {
-                        pulseScale = 1.05
-                    }
-                }
-            }
-            .onChange(of: isActive) { _, newIsActive in
-                if newIsActive {
-                    withAnimation(.easeInOut(duration: 1.5).repeatForever(autoreverses: true)) {
-                        pulseScale = 1.05
-                    }
-                } else {
-                    withAnimation(.easeInOut(duration: 0.3)) {
-                        pulseScale = 1.0
-                    }
-                }
-            }
-            .accessibilityLabel(title)
-            .accessibilityValue(isActive ? "激活" : "未激活")
         }
     }
     
