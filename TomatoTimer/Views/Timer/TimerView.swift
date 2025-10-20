@@ -26,7 +26,7 @@ struct TimerView: View {
                     }
                 }
                 .pickerStyle(.segmented)
-                .disabled(timerEngine.state == .running || !isActiveScene)
+                .disabled(timerEngine.state == .running)
                 .onChange(of: timerEngine.currentMode) { _, newMode in
                     if timerEngine.state != .running {
                         timerEngine.switchMode(to: newMode)

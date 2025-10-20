@@ -271,8 +271,6 @@ class TimerEngine: ObservableObject {
     
     // MARK: - Persistence
     private func saveState() {
-        let encoder = JSONEncoder()
-        
         let stateData: [String: Any] = [
             "state": state.rawValue,
             "mode": currentMode.rawValue,
