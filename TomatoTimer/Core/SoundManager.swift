@@ -29,7 +29,6 @@ class SoundManager: ObservableObject {
             
             print("Audio session configured successfully")
             print("New audio session category: \(session.category.rawValue)")
-            print("Audio session is active: \(session.isActive)")
             print("Other audio is playing: \(session.isOtherAudioPlaying)")
         } catch {
             print("Failed to configure audio session: \(error)")
