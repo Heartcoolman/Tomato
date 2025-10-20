@@ -16,9 +16,6 @@ struct TimerView: View {
     @Environment(\.accessibilityReduceMotion) var reduceMotion
     @Environment(\.scenePhase) var scenePhase
     
-    let sceneID: String
-    let isActiveScene: Bool
-    
     var body: some View {
         ScrollView {
             VStack(spacing: 32) {
@@ -58,19 +55,10 @@ struct TimerView: View {
                 .padding()
                 
                 // 控制按钮
-                if !isActiveScene {
-                    Text("此窗口为只读模式")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                        .padding()
-                } else {
-                    controlButtons
-                }
+                controlButtons
                 
                 // 设置开关
-                if isActiveScene {
-                    settingsToggles
-                }
+                settingsToggles
                 
                 // 今日统计
                 TodayStatsView(statsStore: statsStore)
@@ -288,14 +276,11 @@ struct ToggleRow: View {
 
 #Preview {
     let coordinator = AppStateCoordinator.shared
-    let engine = coordinator.registerScene(id: "preview")
     
     return TimerView(
-        timerEngine: engine,
+        timerEngine: coordinator.getTimerEngine(),
         settingsStore: coordinator.getSettingsStore(),
-        statsStore: coordinator.getStatsStore(),
-        sceneID: "preview",
-        isActiveScene: true
+        statsStore: coordinator.getStatsStore()
     )
 }
 

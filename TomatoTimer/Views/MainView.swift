@@ -28,14 +28,8 @@ struct MainView: View {
     @State private var selectedItem: NavigationItem = .timer
     @State private var columnVisibility: NavigationSplitViewVisibility = .all
     
-    let sceneID: String
-    
     var timerEngine: TimerEngine {
-        coordinator.registerScene(id: sceneID)
-    }
-    
-    var isActiveScene: Bool {
-        coordinator.isActiveScene(id: sceneID)
+        coordinator.getTimerEngine()
     }
     
     var body: some View {
@@ -83,9 +77,7 @@ struct MainView: View {
             TimerView(
                 timerEngine: timerEngine,
                 settingsStore: coordinator.getSettingsStore(),
-                statsStore: coordinator.getStatsStore(),
-                sceneID: sceneID,
-                isActiveScene: isActiveScene
+                statsStore: coordinator.getStatsStore()
             )
         case .history:
             HistoryView(statsStore: coordinator.getStatsStore())
@@ -96,6 +88,6 @@ struct MainView: View {
 }
 
 #Preview {
-    MainView(sceneID: "preview")
+    MainView()
 }
 

@@ -12,8 +12,7 @@ import Combine
 class AppStateCoordinator: ObservableObject {
     static let shared = AppStateCoordinator()
     
-    @Published private(set) var activeTimerEngine: TimerEngine?
-    @Published private(set) var activeSceneID: String?
+    @Published private(set) var sharedTimerEngine: TimerEngine
     
     private var settingsStore: SettingsStore
     private var statsStore: StatsStore
@@ -22,13 +21,8 @@ class AppStateCoordinator: ObservableObject {
         self.settingsStore = SettingsStore()
         self.statsStore = StatsStore()
         
-        // 设置通知观察者
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(handleSceneActivation),
-            name: NSNotification.Name("SceneDidBecomeActive"),
-            object: nil
-        )
+        // 创建共享的计时器引擎
+        self.sharedTimerEngine = TimerEngine(settingsStore: settingsStore, statsStore: statsStore)
     }
     
     func getSettingsStore() -> SettingsStore {
@@ -39,34 +33,8 @@ class AppStateCoordinator: ObservableObject {
         statsStore
     }
     
-    func registerScene(id: String) -> TimerEngine {
-        if activeTimerEngine == nil {
-            // 第一个窗口，创建计时器
-            let engine = TimerEngine(settingsStore: settingsStore, statsStore: statsStore)
-            activeTimerEngine = engine
-            activeSceneID = id
-            return engine
-        } else if activeSceneID == id {
-            // 同一个窗口重新激活
-            return activeTimerEngine!
-        } else {
-            // 其他窗口，返回只读引用
-            return activeTimerEngine!
-        }
-    }
-    
-    func isActiveScene(id: String) -> Bool {
-        return activeSceneID == id
-    }
-    
-    func updateActiveScene(id: String) {
-        activeSceneID = id
-    }
-    
-    @objc private func handleSceneActivation(_ notification: Notification) {
-        if let sceneID = notification.userInfo?["sceneID"] as? String {
-            updateActiveScene(id: sceneID)
-        }
+    func getTimerEngine() -> TimerEngine {
+        sharedTimerEngine
     }
 }
 
