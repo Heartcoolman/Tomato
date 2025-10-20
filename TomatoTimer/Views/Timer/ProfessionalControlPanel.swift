@@ -31,7 +31,7 @@ struct ProfessionalControlPanel: View {
             // Start/Pause button
             ProfessionalButton(
                 icon: timerEngine.state == .running ? "pause.fill" : "play.fill",
-                title: timerEngine.state == .running ? "Pause" : "Start",
+                title: timerEngine.state == .running ? "暂停" : "开始",
                 style: .primary,
                 isActive: timerEngine.state == .running
             ) {
@@ -50,7 +50,7 @@ struct ProfessionalControlPanel: View {
             // Reset button
             ProfessionalButton(
                 icon: "arrow.counterclockwise",
-                title: "Reset",
+                title: "重置",
                 style: .secondary
             ) {
                 timerEngine.reset()
@@ -70,7 +70,7 @@ struct ProfessionalControlPanel: View {
             // Add 5 minutes
             ProfessionalButton(
                 icon: "plus.circle",
-                title: "+5 min",
+                title: "+5分钟",
                 style: .tertiary,
                 compact: true
             ) {
@@ -84,7 +84,7 @@ struct ProfessionalControlPanel: View {
             // Skip
             ProfessionalButton(
                 icon: "forward.end.fill",
-                title: "Skip",
+                title: "跳过",
                 style: .tertiary,
                 compact: true
             ) {

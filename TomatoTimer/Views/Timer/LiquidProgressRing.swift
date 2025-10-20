@@ -67,8 +67,8 @@ struct LiquidProgressRing: View {
             }
         }
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("Timer progress")
-        .accessibilityValue("\(Int(progress * 100)) percent complete")
+        .accessibilityLabel("计时进度")
+        .accessibilityValue("已完成 \(Int(progress * 100))%")
     }
     
     // MARK: - Ring Components

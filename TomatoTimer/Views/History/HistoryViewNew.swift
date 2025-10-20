@@ -63,11 +63,11 @@ struct HistoryViewNew: View {
     private var header: some View {
         HStack {
             VStack(alignment: .leading, spacing: DesignTokens.Spacing.xxs) {
-                Text("History")
+                Text("历史")
                     .font(DesignTokens.Typography.largeTitle)
                     .foregroundColor(.neutralGray)
                 
-                Text("Track your productivity")
+                Text("追踪你的生产力")
                     .font(DesignTokens.Typography.caption)
                     .foregroundColor(.neutralMid)
             }
@@ -77,7 +77,7 @@ struct HistoryViewNew: View {
             // Export button
             ProfessionalButton(
                 icon: "square.and.arrow.up",
-                title: "Export",
+                title: "导出",
                 style: .tertiary,
                 compact: true
             ) {
@@ -92,7 +92,7 @@ struct HistoryViewNew: View {
         VStack(spacing: DesignTokens.Spacing.md) {
             HStack(spacing: DesignTokens.Spacing.md) {
                 InsightCard(
-                    title: "Total Sessions",
+                    title: "总会话数",
                     value: "\(totalSessions)",
                     icon: "circle.fill",
                     color: .primary,
@@ -100,7 +100,7 @@ struct HistoryViewNew: View {
                 )
                 
                 InsightCard(
-                    title: "Total Hours",
+                    title: "总小时数",
                     value: String(format: "%.1f", totalHours),
                     icon: "clock.fill",
                     color: .secondary,
@@ -110,7 +110,7 @@ struct HistoryViewNew: View {
             
             HStack(spacing: DesignTokens.Spacing.md) {
                 InsightCard(
-                    title: "Current Streak",
+                    title: "当前连续",
                     value: "\(statsStore.currentStreak)",
                     icon: "flame.fill",
                     color: .warning,
@@ -118,7 +118,7 @@ struct HistoryViewNew: View {
                 )
                 
                 InsightCard(
-                    title: "Avg per Day",
+                    title: "日均数量",
                     value: String(format: "%.1f", averagePerDay),
                     icon: "chart.line.uptrend.xyaxis",
                     color: .success,
@@ -133,7 +133,7 @@ struct HistoryViewNew: View {
     private var weekStatsSection: some View {
         GlassCard {
             VStack(alignment: .leading, spacing: DesignTokens.Spacing.md) {
-                Text("This Week")
+                Text("本周统计")
                     .font(DesignTokens.Typography.title3)
                     .foregroundColor(.neutralGray)
                 
@@ -175,7 +175,7 @@ struct HistoryViewNew: View {
     
     private var historySection: some View {
         VStack(alignment: .leading, spacing: DesignTokens.Spacing.md) {
-            Text("Recent Sessions")
+            Text("最近会话")
                 .font(DesignTokens.Typography.title3)
                 .foregroundColor(.neutralGray)
             
@@ -356,12 +356,12 @@ struct DaySessionCardNew: View {
     private var relativeDateString: String {
         let calendar = Calendar.current
         if calendar.isDateInToday(date) {
-            return "Today"
+            return "今天"
         } else if calendar.isDateInYesterday(date) {
-            return "Yesterday"
+            return "昨天"
         } else {
             let days = calendar.dateComponents([.day], from: date, to: Date()).day ?? 0
-            return "\(days) days ago"
+            return "\(days) 天前"
         }
     }
 }
@@ -376,11 +376,11 @@ struct EmptyHistoryCard: View {
                     .font(.system(size: 48))
                     .foregroundColor(.neutralMid.opacity(0.5))
                 
-                Text("No history yet")
+                Text("暂无历史记录")
                     .font(DesignTokens.Typography.title3)
                     .foregroundColor(.neutralMid)
                 
-                Text("Complete your first pomodoro session\nto see your history here")
+                Text("完成第一个番茄工作法会话后\n历史记录将显示在这里")
                     .font(DesignTokens.Typography.caption)
                     .foregroundColor(.neutralLight)
                     .multilineTextAlignment(.center)
