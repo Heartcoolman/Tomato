@@ -31,6 +31,18 @@
 		A22 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A022; };
 		A23 /* TimerEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A023; };
 		A24 /* AutoSwitchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A024; };
+		A25 /* DesignTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = A026; };
+		A26 /* AnimationPresets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A027; };
+		A27 /* GlassCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A028; };
+		A28 /* MainViewNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = A029; };
+		A29 /* LiquidProgressRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = A030; };
+		A30 /* ProfessionalControlPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A031; };
+		A31 /* MinimalModeSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = A032; };
+		A32 /* FloatingStatsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A033; };
+		A33 /* ProfessionalTimeDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = A034; };
+		A34 /* TimerViewNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = A035; };
+		A35 /* HistoryViewNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = A036; };
+		A36 /* SettingsViewNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = A037; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +81,18 @@
 		A023 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerEngineTests.swift; sourceTree = "<group>"; };
 		A024 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSwitchTests.swift; sourceTree = "<group>"; };
 		A025 = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A026 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignTokens.swift; sourceTree = "<group>"; };
+		A027 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationPresets.swift; sourceTree = "<group>"; };
+		A028 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassCard.swift; sourceTree = "<group>"; };
+		A029 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewNew.swift; sourceTree = "<group>"; };
+		A030 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiquidProgressRing.swift; sourceTree = "<group>"; };
+		A031 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessionalControlPanel.swift; sourceTree = "<group>"; };
+		A032 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimalModeSelector.swift; sourceTree = "<group>"; };
+		A033 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingStatsCard.swift; sourceTree = "<group>"; };
+		A034 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessionalTimeDisplay.swift; sourceTree = "<group>"; };
+		A035 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewNew.swift; sourceTree = "<group>"; };
+		A036 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewNew.swift; sourceTree = "<group>"; };
+		A037 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewNew.swift; sourceTree = "<group>"; };
 		APPPRODUCT = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TomatoTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		TESTPRODUCT = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TomatoTimerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -159,11 +183,21 @@
 			isa = PBXGroup;
 			children = (
 				A012,
+				A029,
+				COMPONENTS,
 				TIMER,
 				HISTORY,
 				SETTINGS,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		COMPONENTS = {
+			isa = PBXGroup;
+			children = (
+				A028,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		TIMER = {
@@ -172,6 +206,12 @@
 				A013,
 				A014,
 				A015,
+				A030,
+				A031,
+				A032,
+				A033,
+				A034,
+				A035,
 			);
 			path = Timer;
 			sourceTree = "<group>";
@@ -181,6 +221,7 @@
 			children = (
 				A016,
 				A017,
+				A036,
 			);
 			path = History;
 			sourceTree = "<group>";
@@ -189,6 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				A018,
+				A037,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -199,6 +241,8 @@
 				A019,
 				A020,
 				A021,
+				A026,
+				A027,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -324,6 +368,18 @@
 				A19,
 				A20,
 				A21,
+				A25,
+				A26,
+				A27,
+				A28,
+				A29,
+				A30,
+				A31,
+				A32,
+				A33,
+				A34,
+				A35,
+				A36,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
