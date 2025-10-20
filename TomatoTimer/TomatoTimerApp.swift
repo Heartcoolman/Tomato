@@ -16,6 +16,10 @@ struct TomatoTimerApp: App {
         Task {
             await NotificationManager.shared.requestAuthorization()
         }
+        
+        // 初始化音频管理器
+        _ = SoundManager.shared
+        print("SoundManager initialized on app startup")
     }
     
     var body: some Scene {
