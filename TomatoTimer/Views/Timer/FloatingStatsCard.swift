@@ -155,11 +155,11 @@ struct FloatingStatsCard: View {
     // MARK: - Computed Properties
     
     private var todayCompletedSessions: Int {
-        statsStore.completedSessionsToday
+        statsStore.todayPomodoroCount
     }
     
     private var totalMinutesToday: Int {
-        Int(statsStore.totalMinutesToday)
+        statsStore.todayTotalMinutes
     }
     
     private var streakDays: Int {
