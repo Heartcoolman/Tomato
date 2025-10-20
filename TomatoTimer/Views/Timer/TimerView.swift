@@ -586,7 +586,7 @@ struct CelebrationBackgroundView: View {
                 .frame(width: starBursts[index].starSize, height: starBursts[index].starSize)
                 .position(starBursts[index].positions[starIndex])
                 .opacity(starBursts[index].opacity)
-                .rotationEffect(.degrees(starBursts[index].rotations[starIndex]))
+                .rotationEffect(Angle.degrees(starBursts[index].rotations[starIndex]))
                 .scaleEffect(starBursts[index].scales[starIndex])
         }
     }
@@ -808,22 +808,23 @@ struct RippleWave {
     var opacity: Double
 }
 
-struct StarShape: View {
-    var body: some View {
-        Path { path in
-            let width: CGFloat = 20
-            let height: CGFloat = 20
-            
-            path.move(to: CGPoint(x: width * 0.5, y: 0))
-            path.addLine(to: CGPoint(x: width * 0.6, y: height * 0.4))
-            path.addLine(to: CGPoint(x: width, y: height * 0.5))
-            path.addLine(to: CGPoint(x: width * 0.6, y: height * 0.6))
-            path.addLine(to: CGPoint(x: width * 0.5, y: height))
-            path.addLine(to: CGPoint(x: width * 0.4, y: height * 0.6))
-            path.addLine(to: CGPoint(x: 0, y: height * 0.5))
-            path.addLine(to: CGPoint(x: width * 0.4, y: height * 0.4))
-            path.closeSubpath()
-        }
+struct StarShape: Shape {
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        let width = rect.width
+        let height = rect.height
+        
+        path.move(to: CGPoint(x: width * 0.5, y: 0))
+        path.addLine(to: CGPoint(x: width * 0.6, y: height * 0.4))
+        path.addLine(to: CGPoint(x: width, y: height * 0.5))
+        path.addLine(to: CGPoint(x: width * 0.6, y: height * 0.6))
+        path.addLine(to: CGPoint(x: width * 0.5, y: height))
+        path.addLine(to: CGPoint(x: width * 0.4, y: height * 0.6))
+        path.addLine(to: CGPoint(x: 0, y: height * 0.5))
+        path.addLine(to: CGPoint(x: width * 0.4, y: height * 0.4))
+        path.closeSubpath()
+        
+        return path
     }
 }
 
