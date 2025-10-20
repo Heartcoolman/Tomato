@@ -1,0 +1,252 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		TomatoTimerApp /* TomatoTimerApp.swift */ = {isa = PBXBuildFile; };
+		TimerMode /* TimerMode.swift */ = {isa = PBXBuildFile; };
+		TimerState /* TimerState.swift */ = {isa = PBXBuildFile; };
+		PomodoroSession /* PomodoroSession.swift */ = {isa = PBXBuildFile; };
+		TimerEngine /* TimerEngine.swift */ = {isa = PBXBuildFile; };
+		NotificationManager /* NotificationManager.swift */ = {isa = PBXBuildFile; };
+		HapticManager /* HapticManager.swift */ = {isa = PBXBuildFile; };
+		SoundManager /* SoundManager.swift */ = {isa = PBXBuildFile; };
+		SettingsStore /* SettingsStore.swift */ = {isa = PBXBuildFile; };
+		StatsStore /* StatsStore.swift */ = {isa = PBXBuildFile; };
+		AppStateCoordinator /* AppStateCoordinator.swift */ = {isa = PBXBuildFile; };
+		MainView /* MainView.swift */ = {isa = PBXBuildFile; };
+		TimerView /* TimerView.swift */ = {isa = PBXBuildFile; };
+		CircularProgressView /* CircularProgressView.swift */ = {isa = PBXBuildFile; };
+		TodayStatsView /* TodayStatsView.swift */ = {isa = PBXBuildFile; };
+		HistoryView /* HistoryView.swift */ = {isa = PBXBuildFile; };
+		WeekStatsView /* WeekStatsView.swift */ = {isa = PBXBuildFile; };
+		SettingsView /* SettingsView.swift */ = {isa = PBXBuildFile; };
+		Colors /* Colors.swift */ = {isa = PBXBuildFile; };
+		CSVExporter /* CSVExporter.swift */ = {isa = PBXBuildFile; };
+		AccessibilityHelpers /* AccessibilityHelpers.swift */ = {isa = PBXBuildFile; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		TomatoTimer.app /* TomatoTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TomatoTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		MainGroup = {
+			isa = PBXGroup;
+			children = (
+				TomatoTimer,
+				Products,
+			);
+			sourceTree = "<group>";
+		};
+		Products = {
+			isa = PBXGroup;
+			children = (
+				TomatoTimer.app,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		TomatoTimer = {
+			isa = PBXGroup;
+			children = (
+				TomatoTimerApp.swift,
+				Models,
+				Core,
+				Stores,
+				Views,
+				Utilities,
+				Assets.xcassets,
+				Info.plist,
+			);
+			path = TomatoTimer;
+			sourceTree = "<group>";
+		};
+		Models = {
+			isa = PBXGroup;
+			children = (
+				TimerMode.swift,
+				TimerState.swift,
+				PomodoroSession.swift,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		Core = {
+			isa = PBXGroup;
+			children = (
+				TimerEngine.swift,
+				NotificationManager.swift,
+				HapticManager.swift,
+				SoundManager.swift,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		Stores = {
+			isa = PBXGroup;
+			children = (
+				SettingsStore.swift,
+				StatsStore.swift,
+				AppStateCoordinator.swift,
+			);
+			path = Stores;
+			sourceTree = "<group>";
+		};
+		Views = {
+			isa = PBXGroup;
+			children = (
+				MainView.swift,
+				Timer,
+				History,
+				Settings,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		Timer = {
+			isa = PBXGroup;
+			children = (
+				TimerView.swift,
+				CircularProgressView.swift,
+				TodayStatsView.swift,
+			);
+			path = Timer;
+			sourceTree = "<group>";
+		};
+		History = {
+			isa = PBXGroup;
+			children = (
+				HistoryView.swift,
+				WeekStatsView.swift,
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
+		Settings = {
+			isa = PBXGroup;
+			children = (
+				SettingsView.swift,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		Utilities = {
+			isa = PBXGroup;
+			children = (
+				Colors.swift,
+				CSVExporter.swift,
+				AccessibilityHelpers.swift,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		Project = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1520;
+				LastUpgradeCheck = 1520;
+			};
+			buildConfigurationList = ProjectBuildConfigurationList;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = MainGroup;
+			productRefGroup = Products;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				TomatoTimer,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		DebugConfig = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TomatoTimer/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tomatotimer.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "2";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		ReleaseConfig = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TomatoTimer/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tomatotimer.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "2";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+	};
+	rootObject = Project;
+}
+

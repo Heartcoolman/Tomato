@@ -1,0 +1,91 @@
+//
+//  MainView.swift
+//  TomatoTimer
+//
+//  Created by AI Assistant
+//
+
+import SwiftUI
+
+enum NavigationItem: String, CaseIterable, Identifiable {
+    case timer = "计时器"
+    case history = "历史"
+    case settings = "设置"
+    
+    var id: String { rawValue }
+    
+    var icon: String {
+        switch self {
+        case .timer: return "timer"
+        case .history: return "chart.bar.fill"
+        case .settings: return "gearshape.fill"
+        }
+    }
+}
+
+struct MainView: View {
+    @StateObject private var coordinator = AppStateCoordinator.shared
+    @State private var selectedItem: NavigationItem = .timer
+    @State private var columnVisibility: NavigationSplitViewVisibility = .all
+    
+    let sceneID: String
+    
+    var timerEngine: TimerEngine {
+        coordinator.registerScene(id: sceneID)
+    }
+    
+    var isActiveScene: Bool {
+        coordinator.isActiveScene(id: sceneID)
+    }
+    
+    var body: some View {
+        NavigationSplitView(columnVisibility: $columnVisibility) {
+            List(NavigationItem.allCases, selection: $selectedItem) { item in
+                NavigationLink(value: item) {
+                    Label(item.rawValue, systemImage: item.icon)
+                        .foregroundColor(.darkGray)
+                }
+                .listRowBackground(
+                    selectedItem == item ?
+                    Color.tomatoRed.opacity(0.1) :
+                    Color.clear
+                )
+            }
+            .navigationTitle("番茄计时器")
+            .listStyle(.sidebar)
+            .background(Color.lightYellow)
+            .scrollContentBackground(.hidden)
+        } detail: {
+            NavigationStack {
+                detailView
+                    .navigationTitle(selectedItem.rawValue)
+                    .navigationBarTitleDisplayMode(.inline)
+            }
+        }
+        .navigationSplitViewStyle(.balanced)
+        .tint(.tomatoRed)
+    }
+    
+    @ViewBuilder
+    private var detailView: some View {
+        switch selectedItem {
+        case .timer:
+            TimerView(
+                timerEngine: timerEngine,
+                settingsStore: coordinator.getSettingsStore(),
+                statsStore: coordinator.getStatsStore(),
+                sceneID: sceneID,
+                isActiveScene: isActiveScene
+            )
+        case .history:
+            HistoryView(statsStore: coordinator.getStatsStore())
+        case .settings:
+            SettingsView(settingsStore: coordinator.getSettingsStore())
+        }
+    }
+}
+
+#Preview {
+    MainView(sceneID: "preview")
+}
+

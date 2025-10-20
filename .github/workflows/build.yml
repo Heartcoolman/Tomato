@@ -1,0 +1,88 @@
+name: Build Unsigned Archive
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-14
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '15.2'
+      
+      - name: Show Xcode version
+        run: xcodebuild -version
+      
+      - name: Build Unsigned Archive
+        run: |
+          # 创建构建目录
+          mkdir -p build
+          
+          # 构建未签名的 Archive
+          xcodebuild archive \
+            -project TomatoTimer.xcodeproj \
+            -scheme TomatoTimer \
+            -sdk iphoneos \
+            -configuration Release \
+            -archivePath build/TomatoTimer.xcarchive \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            ONLY_ACTIVE_ARCH=NO
+          
+          echo "✅ Archive 构建完成"
+          echo "📦 位置: build/TomatoTimer.xcarchive"
+      
+      - name: Create App Bundle
+        run: |
+          # 从 xcarchive 中提取 .app
+          mkdir -p build/Payload
+          cp -R build/TomatoTimer.xcarchive/Products/Applications/TomatoTimer.app build/Payload/
+          
+          # 创建 IPA（未签名）
+          cd build
+          zip -r TomatoTimer-unsigned.ipa Payload
+          cd ..
+          
+          echo "✅ 未签名 IPA 创建完成"
+          echo "📦 位置: build/TomatoTimer-unsigned.ipa"
+      
+      - name: Upload Unsigned IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: TomatoTimer-Unsigned-IPA
+          path: build/TomatoTimer-unsigned.ipa
+          retention-days: 30
+          if-no-files-found: error
+      
+      - name: Upload xcarchive
+        uses: actions/upload-artifact@v4
+        with:
+          name: TomatoTimer-xcarchive
+          path: build/TomatoTimer.xcarchive
+          retention-days: 30
+          if-no-files-found: warn
+      
+      - name: Build Summary
+        run: |
+          echo "🎉 构建完成！"
+          echo ""
+          echo "📦 已生成以下文件："
+          echo "  • TomatoTimer-unsigned.ipa - 未签名的 IPA（需要自签名）"
+          echo "  • TomatoTimer.xcarchive - Xcode Archive（可在 Xcode 中导出）"
+          echo ""
+          echo "⚡ 下一步："
+          echo "  1. 下载 Artifacts"
+          echo "  2. 使用您的开发者证书签名"
+          echo "  3. 安装到设备"
+          echo ""
+          echo "📖 详见 SELF_SIGNING_GUIDE.md"
+
