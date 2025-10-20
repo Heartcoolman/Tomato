@@ -40,10 +40,20 @@ struct MainView: View {
     
     var body: some View {
         NavigationSplitView(columnVisibility: $columnVisibility) {
-            List(NavigationItem.allCases, selection: $selectedItem) { item in
-                NavigationLink(value: item) {
-                    Label(item.rawValue, systemImage: item.icon)
-                        .foregroundColor(.darkGray)
+            List(NavigationItem.allCases, id: \.self) { item in
+                Button {
+                    selectedItem = item
+                } label: {
+                    HStack {
+                        Label(item.rawValue, systemImage: item.icon)
+                            .foregroundColor(.darkGray)
+                        Spacer()
+                        if selectedItem == item {
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.tomatoRed)
+                                .font(.caption)
+                        }
+                    }
                 }
                 .listRowBackground(
                     selectedItem == item ?
