@@ -36,7 +36,7 @@
 /* Begin PBXContainerItemProxy section */
 		A100 = {
 			isa = PBXContainerItemProxy;
-			containerPortal = ROOT;
+			containerPortal = ROOTPROJECT;
 			proxyType = 1;
 			remoteGlobalIDString = APPTARGET;
 			remoteInfo = TomatoTimer;
@@ -91,7 +91,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		ROOT = {
+		MAINGROUP = {
 			isa = PBXGroup;
 			children = (
 				APPGROUP,
@@ -252,7 +252,7 @@
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		ROOT = {
+		ROOTPROJECT = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
@@ -276,7 +276,7 @@
 				en,
 				Base,
 			);
-			mainGroup = ROOT;
+			mainGroup = MAINGROUP;
 			productRefGroup = PRODUCTS;
 			projectDirPath = "";
 			projectRoot = "";
@@ -599,5 +599,5 @@
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = ROOT;
+	rootObject = ROOTPROJECT;
 }
