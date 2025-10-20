@@ -125,11 +125,11 @@ struct MainViewNew: View {
             .navigationTitle("")
             
         case .history:
-            HistoryView(statsStore: coordinator.getStatsStore())
+            HistoryViewNew(statsStore: coordinator.getStatsStore())
                 .navigationTitle(selectedItem.rawValue)
             
         case .settings:
-            SettingsView(settingsStore: coordinator.getSettingsStore())
+            SettingsViewNew(settingsStore: coordinator.getSettingsStore())
                 .navigationTitle(selectedItem.rawValue)
         }
     }
