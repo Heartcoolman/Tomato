@@ -535,95 +535,95 @@ struct CelebrationBackgroundView: View {
     }
     
     private var backgroundGradient: some View {
-        LinearGradient(
-            colors: [
-                Color.lightYellow,
-                Color.lightYellow.opacity(0.8),
-                Color.orange.opacity(0.1)
-            ],
-            startPoint: .topLeading,
-            endPoint: .bottomTrailing
-        )
-        .ignoresSafeArea()
+            LinearGradient(
+                colors: [
+                    Color.lightYellow,
+                    Color.lightYellow.opacity(0.8),
+                    Color.orange.opacity(0.1)
+                ],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+            .ignoresSafeArea()
     }
-    
+            
     private var rippleWavesView: some View {
-        ForEach(rippleWaves.indices, id: \.self) { index in
-            Circle()
-                .stroke(
-                    LinearGradient(
-                        colors: [
-                            Color.tomatoRed.opacity(rippleWaves[index].opacity),
-                            Color.orange.opacity(rippleWaves[index].opacity * 0.5)
-                        ],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    ),
-                    lineWidth: 2
-                )
-                .frame(width: rippleWaves[index].size, height: rippleWaves[index].size)
-                .position(rippleWaves[index].position)
-                .opacity(rippleWaves[index].opacity)
+            ForEach(rippleWaves.indices, id: \.self) { index in
+                Circle()
+                    .stroke(
+                        LinearGradient(
+                            colors: [
+                                Color.tomatoRed.opacity(rippleWaves[index].opacity),
+                                Color.orange.opacity(rippleWaves[index].opacity * 0.5)
+                            ],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        ),
+                        lineWidth: 2
+                    )
+                    .frame(width: rippleWaves[index].size, height: rippleWaves[index].size)
+                    .position(rippleWaves[index].position)
+                    .opacity(rippleWaves[index].opacity)
         }
-    }
-    
+            }
+            
     private var starBurstsView: some View {
-        ForEach(starBursts.indices, id: \.self) { index in
+            ForEach(starBursts.indices, id: \.self) { index in
             starBurstGroup(at: index)
         }
     }
     
     private func starBurstGroup(at index: Int) -> some View {
-        ForEach(0..<starBursts[index].starCount, id: \.self) { starIndex in
-            StarShape()
-                .fill(
-                    LinearGradient(
-                        colors: starBursts[index].colors,
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-                )
-                .frame(width: starBursts[index].starSize, height: starBursts[index].starSize)
-                .position(starBursts[index].positions[starIndex])
-                .opacity(starBursts[index].opacity)
+                ForEach(0..<starBursts[index].starCount, id: \.self) { starIndex in
+                    StarShape()
+                        .fill(
+                            LinearGradient(
+                                colors: starBursts[index].colors,
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            )
+                        )
+                        .frame(width: starBursts[index].starSize, height: starBursts[index].starSize)
+                        .position(starBursts[index].positions[starIndex])
+                        .opacity(starBursts[index].opacity)
                 .rotationEffect(Angle.degrees(starBursts[index].rotations[starIndex]))
-                .scaleEffect(starBursts[index].scales[starIndex])
-        }
-    }
-    
+                        .scaleEffect(starBursts[index].scales[starIndex])
+                }
+            }
+            
     private var confettiPapersView: some View {
-        ForEach(confettiPapers.indices, id: \.self) { index in
-            RoundedRectangle(cornerRadius: confettiPapers[index].cornerRadius)
-                .fill(confettiPapers[index].color)
-                .frame(width: confettiPapers[index].width, height: confettiPapers[index].height)
-                .position(confettiPapers[index].position)
+            ForEach(confettiPapers.indices, id: \.self) { index in
+                RoundedRectangle(cornerRadius: confettiPapers[index].cornerRadius)
+                    .fill(confettiPapers[index].color)
+                    .frame(width: confettiPapers[index].width, height: confettiPapers[index].height)
+                    .position(confettiPapers[index].position)
                 .rotationEffect(Angle.degrees(confettiPapers[index].rotation))
-                .opacity(confettiPapers[index].opacity)
-                .blur(radius: confettiPapers[index].blur)
+                    .opacity(confettiPapers[index].opacity)
+                    .blur(radius: confettiPapers[index].blur)
         }
-    }
-    
+            }
+            
     private var particlesView: some View {
-        ForEach(particles.indices, id: \.self) { index in
-            Circle()
-                .fill(
-                    RadialGradient(
-                        colors: [
-                            particles[index].color.opacity(0.8),
-                            particles[index].color.opacity(0.4),
-                            particles[index].color.opacity(0.1)
-                        ],
-                        center: .center,
-                        startRadius: 0,
-                        endRadius: particles[index].size / 2
+            ForEach(particles.indices, id: \.self) { index in
+                Circle()
+                    .fill(
+                        RadialGradient(
+                            colors: [
+                                particles[index].color.opacity(0.8),
+                                particles[index].color.opacity(0.4),
+                                particles[index].color.opacity(0.1)
+                            ],
+                            center: .center,
+                            startRadius: 0,
+                            endRadius: particles[index].size / 2
+                        )
                     )
-                )
-                .frame(width: particles[index].size, height: particles[index].size)
-                .position(particles[index].position)
-                .opacity(particles[index].opacity)
-                .scaleEffect(particles[index].scale)
-                .blur(radius: particles[index].blur)
-                .shadow(color: particles[index].color.opacity(0.3), radius: 4, x: 0, y: 2)
+                    .frame(width: particles[index].size, height: particles[index].size)
+                    .position(particles[index].position)
+                    .opacity(particles[index].opacity)
+                    .scaleEffect(particles[index].scale)
+                    .blur(radius: particles[index].blur)
+                    .shadow(color: particles[index].color.opacity(0.3), radius: 4, x: 0, y: 2)
         }
     }
     
@@ -813,16 +813,16 @@ struct StarShape: Shape {
         var path = Path()
         let width = rect.width
         let height = rect.height
-        
-        path.move(to: CGPoint(x: width * 0.5, y: 0))
-        path.addLine(to: CGPoint(x: width * 0.6, y: height * 0.4))
-        path.addLine(to: CGPoint(x: width, y: height * 0.5))
-        path.addLine(to: CGPoint(x: width * 0.6, y: height * 0.6))
-        path.addLine(to: CGPoint(x: width * 0.5, y: height))
-        path.addLine(to: CGPoint(x: width * 0.4, y: height * 0.6))
-        path.addLine(to: CGPoint(x: 0, y: height * 0.5))
-        path.addLine(to: CGPoint(x: width * 0.4, y: height * 0.4))
-        path.closeSubpath()
+            
+            path.move(to: CGPoint(x: width * 0.5, y: 0))
+            path.addLine(to: CGPoint(x: width * 0.6, y: height * 0.4))
+            path.addLine(to: CGPoint(x: width, y: height * 0.5))
+            path.addLine(to: CGPoint(x: width * 0.6, y: height * 0.6))
+            path.addLine(to: CGPoint(x: width * 0.5, y: height))
+            path.addLine(to: CGPoint(x: width * 0.4, y: height * 0.6))
+            path.addLine(to: CGPoint(x: 0, y: height * 0.5))
+            path.addLine(to: CGPoint(x: width * 0.4, y: height * 0.4))
+            path.closeSubpath()
         
         return path
     }

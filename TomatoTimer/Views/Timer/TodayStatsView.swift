@@ -17,19 +17,19 @@ struct TodayStatsView: View {
                 .foregroundColor(.darkGray)
             
             HStack(spacing: 40) {
-                StatItem(
+                TodayStatItem(
                     icon: "🍅",
                     value: "\(statsStore.todayPomodoroCount)",
                     label: "完成番茄"
                 )
                 
-                StatItem(
+                TodayStatItem(
                     icon: "⏱️",
                     value: "\(statsStore.todayTotalMinutes)",
                     label: "总分钟数"
                 )
                 
-                StatItem(
+                TodayStatItem(
                     icon: "🔥",
                     value: "\(statsStore.currentStreak)",
                     label: "连续天数"
@@ -45,7 +45,7 @@ struct TodayStatsView: View {
     }
 }
 
-struct StatItem: View {
+struct TodayStatItem: View {
     let icon: String
     let value: String
     let label: String

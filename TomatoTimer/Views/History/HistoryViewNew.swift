@@ -202,7 +202,7 @@ struct HistoryViewNew: View {
     }
     
     private var averagePerDay: Double {
-        let days = Set(statsStore.sessions.map { Calendar.current.startOfDay(for: $0.completedDate) }).count
+        let days = Set(statsStore.sessions.map { Calendar.current.startOfDay(for: $0.date) }).count
         guard days > 0 else { return 0 }
         return Double(totalSessions) / Double(days)
     }
@@ -211,10 +211,10 @@ struct HistoryViewNew: View {
         let calendar = Calendar.current
         let today = calendar.startOfDay(for: Date())
         
-        return (0..<7).map { dayOffset in
+        return (0..<7).map { (dayOffset: Int) -> (Date, Int) in
             let date = calendar.date(byAdding: .day, value: -dayOffset, to: today)!
             let count = statsStore.sessions.filter {
-                calendar.isDate($0.completedDate, inSameDayAs: date) && $0.mode == .work
+                calendar.isDate($0.date, inSameDayAs: date) && $0.mode == .work
             }.count
             return (date, count)
         }.reversed()

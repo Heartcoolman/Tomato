@@ -140,16 +140,6 @@ struct ProfessionalTimeDisplay: View {
     }
 }
 
-// MARK: - Helper Extension
-
-extension TimeInterval {
-    var accessibilityTimeDescription: String {
-        let minutes = Int(self) / 60
-        let seconds = Int(self) % 60
-        return "\(minutes) minutes and \(seconds) seconds"
-    }
-}
-
 // MARK: - Preview
 
 #Preview {
