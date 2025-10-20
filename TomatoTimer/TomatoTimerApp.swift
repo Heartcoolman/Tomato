@@ -24,7 +24,7 @@ struct TomatoTimerApp: App {
     
     var body: some Scene {
         WindowGroup {
-            MainView()
+            MainViewNew()
                 .preferredColorScheme(.light)
                 .onAppear {
                     // 清除通知角标
