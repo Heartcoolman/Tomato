@@ -5,16 +5,16 @@
 //  Created by AI Assistant
 //
 
-import Foundation
+import SwiftUI
 import UniformTypeIdentifiers
 
 struct CSVFile: FileDocument {
     static var readableContentTypes: [UTType] { [.commaSeparatedText] }
     
-    var content: String
+    var text: String
     
-    init(content: String) {
-        self.content = content
+    init(text: String) {
+        self.text = text
     }
     
     init(configuration: ReadConfiguration) throws {
@@ -22,11 +22,13 @@ struct CSVFile: FileDocument {
               let string = String(data: data, encoding: .utf8) else {
             throw CocoaError(.fileReadCorruptFile)
         }
-        content = string
+        text = string
     }
     
     func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
-        let data = content.data(using: .utf8) ?? Data()
+        guard let data = text.data(using: .utf8) else {
+            throw CocoaError(.fileWriteUnknown)
+        }
         return FileWrapper(regularFileWithContents: data)
     }
 }

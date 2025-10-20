@@ -80,7 +80,7 @@ struct HistoryView: View {
     
     private func exportToCSV() {
         let csvContent = statsStore.exportToCSV()
-        csvDocument = CSVFile(content: csvContent)
+        csvDocument = CSVFile(text: csvContent)
         showingExportSheet = true
     }
     
