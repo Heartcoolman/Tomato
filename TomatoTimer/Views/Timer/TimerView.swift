@@ -522,93 +522,108 @@ struct CelebrationBackgroundView: View {
     
     var body: some View {
         ZStack {
-            // 背景渐变
-            LinearGradient(
-                colors: [
-                    Color.lightYellow,
-                    Color.lightYellow.opacity(0.8),
-                    Color.orange.opacity(0.1)
-                ],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-            .ignoresSafeArea()
-            
-            // 涟漪波纹
-            ForEach(rippleWaves.indices, id: \.self) { index in
-                Circle()
-                    .stroke(
-                        LinearGradient(
-                            colors: [
-                                Color.tomatoRed.opacity(rippleWaves[index].opacity),
-                                Color.orange.opacity(rippleWaves[index].opacity * 0.5)
-                            ],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        ),
-                        lineWidth: 2
-                    )
-                    .frame(width: rippleWaves[index].size, height: rippleWaves[index].size)
-                    .position(rippleWaves[index].position)
-                    .opacity(rippleWaves[index].opacity)
-            }
-            
-            // 星星爆炸效果
-            ForEach(starBursts.indices, id: \.self) { index in
-                ForEach(0..<starBursts[index].starCount, id: \.self) { starIndex in
-                    StarShape()
-                        .fill(
-                            LinearGradient(
-                                colors: starBursts[index].colors,
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            )
-                        )
-                        .frame(width: starBursts[index].starSize, height: starBursts[index].starSize)
-                        .position(starBursts[index].positions[starIndex])
-                        .opacity(starBursts[index].opacity)
-                        .rotationEffect(.degrees(starBursts[index].rotations[starIndex]))
-                        .scaleEffect(starBursts[index].scales[starIndex])
-                }
-            }
-            
-            // 彩色纸屑
-            ForEach(confettiPapers.indices, id: \.self) { index in
-                RoundedRectangle(cornerRadius: confettiPapers[index].cornerRadius)
-                    .fill(confettiPapers[index].color)
-                    .frame(width: confettiPapers[index].width, height: confettiPapers[index].height)
-                    .position(confettiPapers[index].position)
-                    .rotationEffect(.degrees(confettiPapers[index].rotation))
-                    .opacity(confettiPapers[index].opacity)
-                    .blur(radius: confettiPapers[index].blur)
-            }
-            
-            // 原有的粒子效果
-            ForEach(particles.indices, id: \.self) { index in
-                Circle()
-                    .fill(
-                        RadialGradient(
-                            colors: [
-                                particles[index].color.opacity(0.8),
-                                particles[index].color.opacity(0.4),
-                                particles[index].color.opacity(0.1)
-                            ],
-                            center: .center,
-                            startRadius: 0,
-                            endRadius: particles[index].size / 2
-                        )
-                    )
-                    .frame(width: particles[index].size, height: particles[index].size)
-                    .position(particles[index].position)
-                    .opacity(particles[index].opacity)
-                    .scaleEffect(particles[index].scale)
-                    .blur(radius: particles[index].blur)
-                    .shadow(color: particles[index].color.opacity(0.3), radius: 4, x: 0, y: 2)
-            }
+            backgroundGradient
+            rippleWavesView
+            starBurstsView
+            confettiPapersView
+            particlesView
         }
         .onAppear {
             generateCelebrationElements()
             startCelebrationAnimation()
+        }
+    }
+    
+    private var backgroundGradient: some View {
+        LinearGradient(
+            colors: [
+                Color.lightYellow,
+                Color.lightYellow.opacity(0.8),
+                Color.orange.opacity(0.1)
+            ],
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+        .ignoresSafeArea()
+    }
+    
+    private var rippleWavesView: some View {
+        ForEach(rippleWaves.indices, id: \.self) { index in
+            Circle()
+                .stroke(
+                    LinearGradient(
+                        colors: [
+                            Color.tomatoRed.opacity(rippleWaves[index].opacity),
+                            Color.orange.opacity(rippleWaves[index].opacity * 0.5)
+                        ],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    ),
+                    lineWidth: 2
+                )
+                .frame(width: rippleWaves[index].size, height: rippleWaves[index].size)
+                .position(rippleWaves[index].position)
+                .opacity(rippleWaves[index].opacity)
+        }
+    }
+    
+    private var starBurstsView: some View {
+        ForEach(starBursts.indices, id: \.self) { index in
+            starBurstGroup(at: index)
+        }
+    }
+    
+    private func starBurstGroup(at index: Int) -> some View {
+        ForEach(0..<starBursts[index].starCount, id: \.self) { starIndex in
+            StarShape()
+                .fill(
+                    LinearGradient(
+                        colors: starBursts[index].colors,
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
+                .frame(width: starBursts[index].starSize, height: starBursts[index].starSize)
+                .position(starBursts[index].positions[starIndex])
+                .opacity(starBursts[index].opacity)
+                .rotationEffect(.degrees(starBursts[index].rotations[starIndex]))
+                .scaleEffect(starBursts[index].scales[starIndex])
+        }
+    }
+    
+    private var confettiPapersView: some View {
+        ForEach(confettiPapers.indices, id: \.self) { index in
+            RoundedRectangle(cornerRadius: confettiPapers[index].cornerRadius)
+                .fill(confettiPapers[index].color)
+                .frame(width: confettiPapers[index].width, height: confettiPapers[index].height)
+                .position(confettiPapers[index].position)
+                .rotationEffect(.degrees(confettiPapers[index].rotation))
+                .opacity(confettiPapers[index].opacity)
+                .blur(radius: confettiPapers[index].blur)
+        }
+    }
+    
+    private var particlesView: some View {
+        ForEach(particles.indices, id: \.self) { index in
+            Circle()
+                .fill(
+                    RadialGradient(
+                        colors: [
+                            particles[index].color.opacity(0.8),
+                            particles[index].color.opacity(0.4),
+                            particles[index].color.opacity(0.1)
+                        ],
+                        center: .center,
+                        startRadius: 0,
+                        endRadius: particles[index].size / 2
+                    )
+                )
+                .frame(width: particles[index].size, height: particles[index].size)
+                .position(particles[index].position)
+                .opacity(particles[index].opacity)
+                .scaleEffect(particles[index].scale)
+                .blur(radius: particles[index].blur)
+                .shadow(color: particles[index].color.opacity(0.3), radius: 4, x: 0, y: 2)
         }
     }
     
