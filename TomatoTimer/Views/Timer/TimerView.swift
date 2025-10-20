@@ -597,7 +597,7 @@ struct CelebrationBackgroundView: View {
                 .fill(confettiPapers[index].color)
                 .frame(width: confettiPapers[index].width, height: confettiPapers[index].height)
                 .position(confettiPapers[index].position)
-                .rotationEffect(.degrees(confettiPapers[index].rotation))
+                .rotationEffect(Angle.degrees(confettiPapers[index].rotation))
                 .opacity(confettiPapers[index].opacity)
                 .blur(radius: confettiPapers[index].blur)
         }
