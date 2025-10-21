@@ -52,6 +52,9 @@ struct MainViewNew: View {
                 statsStore: coordinator.getStatsStore()
             )
             
+        case .reader:
+            ReaderMainView()
+            
         case .pet:
             NavigationStack {
             PetView(
@@ -113,6 +116,17 @@ struct MainViewNew: View {
             RadialGradient(
                 colors: [
                     Color.modernBlue1.opacity(0.05),
+                    Color.clear
+                ],
+                center: .center,
+                startRadius: 100,
+                endRadius: 600
+            )
+            
+        case .reader:
+            RadialGradient(
+                colors: [
+                    Color.modernPurple1.opacity(0.05),
                     Color.clear
                 ],
                 center: .center,

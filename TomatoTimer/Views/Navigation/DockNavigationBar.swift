@@ -10,6 +10,7 @@ import SwiftUI
 /// Dock导航项
 enum DockItem: String, CaseIterable, Identifiable {
     case timer = "计时器"
+    case reader = "阅读"
     case pet = "宠物"
     case achievements = "成就"
     case history = "历史"
@@ -20,6 +21,7 @@ enum DockItem: String, CaseIterable, Identifiable {
     var icon: String {
         switch self {
         case .timer: return "timer"
+        case .reader: return "book.fill"
         case .pet: return "pawprint.fill"
         case .achievements: return "trophy.fill"
         case .history: return "chart.bar.fill"
