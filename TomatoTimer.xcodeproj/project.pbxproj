@@ -43,6 +43,29 @@
 		A34 /* TimerViewNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = A035; };
 		A35 /* HistoryViewNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = A036; };
 		A36 /* SettingsViewNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = A037; };
+		A101 /* TomatoCoin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A102; };
+		A103 /* VirtualPet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A104; };
+		A105 /* PetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A106; };
+		A107 /* PetSkill.swift in Sources */ = {isa = PBXBuildFile; fileRef = A108; };
+		A109 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = A110; };
+		A111 /* MiniGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112; };
+		A113 /* GameStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A114; };
+		A115 /* PetStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A116; };
+		A117 /* PetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A118; };
+		A119 /* PetAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A120; };
+		A121 /* CreatePetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A122; };
+		A123 /* PetFloatingWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A124; };
+		A125 /* PetDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A126; };
+		A127 /* AchievementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A128; };
+		A129 /* AchievementCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A130; };
+		A131 /* AchievementUnlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A132; };
+		A133 /* CoinWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A134; };
+		A135 /* CoinHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A136; };
+		A137 /* CoinAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A138; };
+		A139 /* GameCenterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A140; };
+		A141 /* FruitCatchGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A142; };
+		A143 /* Tomato2048Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = A144; };
+		A145 /* MemoryCardGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A146; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +118,29 @@
 		A037 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewNew.swift; sourceTree = "<group>"; };
 		APPPRODUCT = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TomatoTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		TESTPRODUCT = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TomatoTimerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A102 /* TomatoCoin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TomatoCoin.swift; sourceTree = "<group>"; };
+		A104 /* VirtualPet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualPet.swift; sourceTree = "<group>"; };
+		A106 /* PetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetType.swift; sourceTree = "<group>"; };
+		A108 /* PetSkill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetSkill.swift; sourceTree = "<group>"; };
+		A110 /* Achievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
+		A112 /* MiniGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniGame.swift; sourceTree = "<group>"; };
+		A114 /* GameStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStore.swift; sourceTree = "<group>"; };
+		A116 /* PetStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetStore.swift; sourceTree = "<group>"; };
+		A118 /* PetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetView.swift; sourceTree = "<group>"; };
+		A120 /* PetAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetAnimationView.swift; sourceTree = "<group>"; };
+		A122 /* CreatePetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePetView.swift; sourceTree = "<group>"; };
+		A124 /* PetFloatingWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetFloatingWidget.swift; sourceTree = "<group>"; };
+		A126 /* PetDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetDetailView.swift; sourceTree = "<group>"; };
+		A128 /* AchievementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementView.swift; sourceTree = "<group>"; };
+		A130 /* AchievementCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementCardView.swift; sourceTree = "<group>"; };
+		A132 /* AchievementUnlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementUnlockView.swift; sourceTree = "<group>"; };
+		A134 /* CoinWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinWidget.swift; sourceTree = "<group>"; };
+		A136 /* CoinHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinHistoryView.swift; sourceTree = "<group>"; };
+		A138 /* CoinAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinAnimationView.swift; sourceTree = "<group>"; };
+		A140 /* GameCenterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCenterView.swift; sourceTree = "<group>"; };
+		A142 /* FruitCatchGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitCatchGame.swift; sourceTree = "<group>"; };
+		A144 /* Tomato2048Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tomato2048Game.swift; sourceTree = "<group>"; };
+		A146 /* MemoryCardGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCardGame.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +200,12 @@
 				A002,
 				A003,
 				A004,
+				A102,
+				A104,
+				A106,
+				A108,
+				A110,
+				A112,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -175,6 +227,8 @@
 				A009,
 				A010,
 				A011,
+				A114,
+				A116,
 			);
 			path = Stores;
 			sourceTree = "<group>";
@@ -188,6 +242,9 @@
 				TIMER,
 				HISTORY,
 				SETTINGS,
+				PET,
+				ACHIEVEMENT,
+				GAME,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -245,6 +302,42 @@
 				A027,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		PET = {
+			isa = PBXGroup;
+			children = (
+				A118,
+				A120,
+				A122,
+				A124,
+				A126,
+			);
+			path = Pet;
+			sourceTree = "<group>";
+		};
+		ACHIEVEMENT = {
+			isa = PBXGroup;
+			children = (
+				A128,
+				A130,
+				A132,
+			);
+			path = Achievement;
+			sourceTree = "<group>";
+		};
+		GAME = {
+			isa = PBXGroup;
+			children = (
+				A134,
+				A136,
+				A138,
+				A140,
+				A142,
+				A144,
+				A146,
+			);
+			path = Game;
 			sourceTree = "<group>";
 		};
 		TESTGROUP = {
@@ -380,6 +473,29 @@
 				A34,
 				A35,
 				A36,
+				A101,
+				A103,
+				A105,
+				A107,
+				A109,
+				A111,
+				A113,
+				A115,
+				A117,
+				A119,
+				A121,
+				A123,
+				A125,
+				A127,
+				A129,
+				A131,
+				A133,
+				A135,
+				A137,
+				A139,
+				A141,
+				A143,
+				A145,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
