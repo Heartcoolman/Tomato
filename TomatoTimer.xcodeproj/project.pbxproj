@@ -72,6 +72,18 @@
 		A153 /* ModePillSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = A154; };
 		A155 /* ParticleSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A156; };
 		A157 /* DockNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A158; };
+		A201 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200; };
+		A203 /* WebDAVAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202; };
+		A205 /* ReaderSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A204; };
+		A207 /* WebDAVManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A206; };
+		A209 /* EncodingDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = A208; };
+		A211 /* ChapterParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A210; };
+		A213 /* BookStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A212; };
+		A215 /* ReaderMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A214; };
+		A217 /* WebDAVFileListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216; };
+		A219 /* AddWebDAVAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A218; };
+		A221 /* BookReaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A220; };
+		A223 /* EncodingPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A222; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -153,6 +165,18 @@
 		A154 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModePillSelector.swift; sourceTree = "<group>"; };
 		A156 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleSystem.swift; sourceTree = "<group>"; };
 		A158 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockNavigationBar.swift; sourceTree = "<group>"; };
+		A200 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
+		A202 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebDAVAccount.swift; sourceTree = "<group>"; };
+		A204 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderSettings.swift; sourceTree = "<group>"; };
+		A206 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebDAVManager.swift; sourceTree = "<group>"; };
+		A208 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncodingDetector.swift; sourceTree = "<group>"; };
+		A210 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterParser.swift; sourceTree = "<group>"; };
+		A212 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookStore.swift; sourceTree = "<group>"; };
+		A214 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderMainView.swift; sourceTree = "<group>"; };
+		A216 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebDAVFileListView.swift; sourceTree = "<group>"; };
+		A218 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWebDAVAccountView.swift; sourceTree = "<group>"; };
+		A220 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookReaderView.swift; sourceTree = "<group>"; };
+		A222 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncodingPickerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,6 +242,9 @@
 				A108,
 				A110,
 				A112,
+				A200,
+				A202,
+				A204,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -229,6 +256,9 @@
 				A006,
 				A007,
 				A008,
+				A206,
+				A208,
+				A210,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -241,6 +271,7 @@
 				A011,
 				A114,
 				A116,
+				A212,
 			);
 			path = Stores;
 			sourceTree = "<group>";
@@ -258,6 +289,7 @@
 			PET,
 			ACHIEVEMENT,
 			GAME,
+			READER,
 		);
 		path = Views;
 		sourceTree = "<group>";
@@ -364,6 +396,18 @@
 				A146,
 			);
 			path = Game;
+			sourceTree = "<group>";
+		};
+		READER = {
+			isa = PBXGroup;
+			children = (
+				A214,
+				A216,
+				A218,
+				A220,
+				A222,
+			);
+			path = Reader;
 			sourceTree = "<group>";
 		};
 		TESTGROUP = {
@@ -528,6 +572,18 @@
 				A153 /* ModePillSelector.swift in Sources */,
 				A155 /* ParticleSystem.swift in Sources */,
 				A157 /* DockNavigationBar.swift in Sources */,
+				A201 /* Book.swift in Sources */,
+				A203 /* WebDAVAccount.swift in Sources */,
+				A205 /* ReaderSettings.swift in Sources */,
+				A207 /* WebDAVManager.swift in Sources */,
+				A209 /* EncodingDetector.swift in Sources */,
+				A211 /* ChapterParser.swift in Sources */,
+				A213 /* BookStore.swift in Sources */,
+				A215 /* ReaderMainView.swift in Sources */,
+				A217 /* WebDAVFileListView.swift in Sources */,
+				A219 /* AddWebDAVAccountView.swift in Sources */,
+				A221 /* BookReaderView.swift in Sources */,
+				A223 /* EncodingPickerView.swift in Sources */,
 );
 			runOnlyForDeploymentPostprocessing = 0;
 		};
