@@ -2,6 +2,8 @@ name: Build Unsigned Archive
 
 on:
   push:
+    branches: [main, master, feature/*]
+  pull_request:
     branches: [main, master]
   workflow_dispatch:
 
@@ -43,9 +45,21 @@ jobs:
       
       - name: Create App Bundle
         run: |
-          # 从 xcarchive 中提取 .app
+          # 从 xcarchive 中提取 .app（动态查找）
           mkdir -p build/Payload
-          cp -R build/TomatoTimer.xcarchive/Products/Applications/TomatoTimer.app build/Payload/
+          
+          # 查找 .app 文件（支持任何名称）
+          APP_PATH=$(find build/TomatoTimer.xcarchive/Products/Applications -name "*.app" -type d | head -1)
+          
+          if [ -z "$APP_PATH" ]; then
+            echo "❌ 错误：找不到 .app 文件"
+            echo "📂 查找路径："
+            ls -la build/TomatoTimer.xcarchive/Products/Applications/ || echo "目录不存在"
+            exit 1
+          fi
+          
+          echo "✅ 找到 App: $APP_PATH"
+          cp -R "$APP_PATH" build/Payload/
           
           # 创建 IPA（未签名）
           cd build
