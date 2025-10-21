@@ -189,6 +189,61 @@ struct DesignTokens {
         static let tertiary: Double = 0.5
         static let ghost: Double = 0.3
     }
+    
+    // MARK: - Animation Curves (动画曲线)
+    
+    /// 预定义动画曲线
+    struct AnimationCurves {
+        /// 液体玻璃动画（流畅弹性）
+        static let liquidGlass = Animation.spring(response: 0.6, dampingFraction: 0.8)
+        
+        /// 庆祝动画（强弹性）
+        static let celebration = Animation.spring(response: 0.8, dampingFraction: 0.6)
+        
+        /// 弹性按钮动画
+        static let elasticButton = Animation.spring(response: 0.3, dampingFraction: 0.7)
+        
+        /// 平滑过渡
+        static let smooth = Animation.easeInOut(duration: 0.3)
+        
+        /// 快速过渡
+        static let quick = Animation.easeOut(duration: 0.2)
+        
+        /// 悬浮效果
+        static let hover = Animation.easeInOut(duration: 0.15)
+        
+        /// 呼吸效果
+        static let breathing = Animation.easeInOut(duration: 2.0).repeatForever(autoreverses: true)
+        
+        /// 脉冲效果
+        static let pulse = Animation.easeInOut(duration: 0.5).repeatForever(autoreverses: true)
+        
+        /// 流动效果（用于渐变）
+        static let flowing = Animation.linear(duration: 3.0).repeatForever(autoreverses: false)
+    }
+    
+    // MARK: - Card Sizes (卡片尺寸)
+    
+    /// 预定义卡片尺寸
+    struct CardSize {
+        /// 头部状态卡片
+        static let headerCard = CGSize(width: 220, height: 72)
+        
+        /// 状态卡片
+        static let statusCard = CGSize(width: 160, height: 120)
+        
+        /// 互动按钮卡片
+        static let interactionCard = CGSize(width: 160, height: 160)
+        
+        /// 游戏卡片
+        static let gameCard = CGSize(width: 880, height: 180)
+        
+        /// 成就卡片
+        static let achievementCard = CGSize(width: 200, height: 240)
+        
+        /// 宠物展示卡片
+        static let petDisplayCard = CGSize(width: 600, height: 700)
+    }
 }
 
 // MARK: - View Modifiers
