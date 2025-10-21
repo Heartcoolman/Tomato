@@ -28,7 +28,7 @@ class ChapterParser {
         let lines = text.components(separatedBy: "\n")
         var currentPosition = 0
         
-        for (index, line) in lines.enumerated() {
+        for line in lines {
             let trimmedLine = line.trimmingCharacters(in: .whitespaces)
             
             // 检查是否匹配章节模式
