@@ -169,7 +169,7 @@ View ← ObservableObject → ViewModel/Store
 ### Info.plist
 ```xml
 - 应用名称：番茄计时器
-- 支持平台：iPad only (iPadOS 17+)
+- 支持平台：iPad only (iPadOS 26+)
 - 多窗口支持：是
 - 通知权限描述
 - 后台音频支持
@@ -184,7 +184,7 @@ View ← ObservableObject → ViewModel/Store
 
 ### project.pbxproj
 ```
-- 目标平台：iPadOS 17.0+
+- 目标平台：iPadOS 26.0+
 - Swift 版本：5.0
 - 设备家族：iPad (2)
 - Bundle ID：com.tomatotimer.app

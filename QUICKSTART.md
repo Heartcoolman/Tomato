@@ -18,7 +18,7 @@
 
 - [ ] GitHub 账号
 - [ ] Apple ID（任何 Apple ID，免费）
-- [ ] iPad（iPadOS 17+）
+- [ ] iPad（iPadOS 26+）
 - [ ] 电脑（Windows/Mac）
 - [ ] USB 数据线
 
