@@ -118,7 +118,8 @@ class TimerEngine: ObservableObject {
     }
     
     func skipToNext() {
-        completeCurrentSession()
+        // 跳过不计入完成，不给奖励
+        recordSkippedSession()
         switchToNextMode()
         reset()
         
@@ -247,8 +248,13 @@ class TimerEngine: ObservableObject {
         )
         statsStore.addSession(session)
         
-        // 游戏化奖励
+        // 游戏化奖励（只有完成才给，跳过不给）
         rewardCompletion()
+    }
+    
+    private func recordSkippedSession() {
+        // 跳过的会话不计入统计，不给任何奖励
+        // 可以选择性地记录跳过次数用于其他统计
     }
     
     private func rewardCompletion() {
