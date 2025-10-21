@@ -139,39 +139,40 @@ struct TimerView: View {
         .sheet(isPresented: $showGameCenter) {
             GameCenterView(gameStore: gameStore)
         }
-        
-        // 金币飞入动画
-        if showCoinAnimation {
-            VStack {
-                Spacer()
-                HStack {
+            
+            // 金币飞入动画
+            if showCoinAnimation {
+                VStack {
                     Spacer()
-                    CoinAnimationView(amount: coinAnimationAmount)
-                        .padding()
+                    HStack {
+                        Spacer()
+                        CoinAnimationView(amount: coinAnimationAmount)
+                            .padding()
+                    }
                 }
             }
-        }
-        
-        // 成就解锁动画
-        if let achievement = gameStore.showAchievementUnlock {
-            AchievementUnlockView(achievement: achievement) {
-                gameStore.dismissAchievementUnlock()
+            
+            // 成就解锁动画
+            if let achievement = gameStore.showAchievementUnlock {
+                AchievementUnlockView(achievement: achievement) {
+                    gameStore.dismissAchievementUnlock()
+                }
             }
-        }
-        
-        // 宠物升级动画
-        if petStore.showLevelUp {
-            levelUpOverlay
-        }
-        
-        // 宠物进化动画
-        if petStore.showEvolution {
-            evolutionOverlay
-        }
-        
-        // 宠物庆祝动画
-        if petStore.showCelebration {
-            celebrationOverlay
+            
+            // 宠物升级动画
+            if petStore.showLevelUp {
+                levelUpOverlay
+            }
+            
+            // 宠物进化动画
+            if petStore.showEvolution {
+                evolutionOverlay
+            }
+            
+            // 宠物庆祝动画
+            if petStore.showCelebration {
+                celebrationOverlay
+            }
         }
     }
     

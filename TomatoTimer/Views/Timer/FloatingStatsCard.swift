@@ -81,7 +81,7 @@ struct FloatingStatsCard: View {
     
     private var statsGrid: some View {
         HStack(spacing: DesignTokens.Spacing.lg) {
-            StatItem(
+            FloatingStatItem(
                 icon: "circle.fill",
                 value: "\(todayCompletedSessions)",
                 label: "已完成",
@@ -91,7 +91,7 @@ struct FloatingStatsCard: View {
             Divider()
                 .frame(height: 40)
             
-            StatItem(
+            FloatingStatItem(
                 icon: "clock.fill",
                 value: "\(totalMinutesToday)",
                 label: "分钟",
@@ -101,7 +101,7 @@ struct FloatingStatsCard: View {
             Divider()
                 .frame(height: 40)
             
-            StatItem(
+            FloatingStatItem(
                 icon: "flame.fill",
                 value: "\(streakDays)",
                 label: "连续",
@@ -178,7 +178,7 @@ struct FloatingStatsCard: View {
 
 // MARK: - Stat Item
 
-struct StatItem: View {
+struct FloatingStatItem: View {
     let icon: String
     let value: String
     let label: String
