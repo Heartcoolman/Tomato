@@ -114,10 +114,13 @@ class PetStore: ObservableObject {
         pet.happiness = min(100, pet.happiness + 5)
         pet.lastFeedTime = Date()
         
-        addExperience(amount: 5)
-        
+        // 先保存当前修改
         currentPet = pet
         savePet()
+        
+        // 然后添加经验（可能触发升级）
+        addExperience(amount: 5)
+        
         return true
     }
     
@@ -133,10 +136,13 @@ class PetStore: ObservableObject {
         pet.energy = max(0, pet.energy - 10)
         pet.lastPlayTime = Date()
         
-        addExperience(amount: 5)
-        
+        // 先保存当前修改
         currentPet = pet
         savePet()
+        
+        // 然后添加经验（可能触发升级）
+        addExperience(amount: 5)
+        
         return true
     }
     

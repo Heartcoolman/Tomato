@@ -313,25 +313,39 @@ struct CompletionCelebration: View {
 // MARK: - Preview
 
 #Preview("Wide Layout") {
-    TimerViewNew(
+    let settingsStore = SettingsStore()
+    let statsStore = StatsStore()
+    let gameStore = GameStore()
+    let petStore = PetStore()
+    
+    return TimerViewNew(
         timerEngine: TimerEngine(
-            settingsStore: SettingsStore(),
-            statsStore: StatsStore()
+            settingsStore: settingsStore,
+            statsStore: statsStore,
+            gameStore: gameStore,
+            petStore: petStore
         ),
-        settingsStore: SettingsStore(),
-        statsStore: StatsStore()
+        settingsStore: settingsStore,
+        statsStore: statsStore
     )
     .frame(width: 1200, height: 800)
 }
 
 #Preview("Compact Layout") {
-    TimerViewNew(
+    let settingsStore = SettingsStore()
+    let statsStore = StatsStore()
+    let gameStore = GameStore()
+    let petStore = PetStore()
+    
+    return TimerViewNew(
         timerEngine: TimerEngine(
-            settingsStore: SettingsStore(),
-            statsStore: StatsStore()
+            settingsStore: settingsStore,
+            statsStore: statsStore,
+            gameStore: gameStore,
+            petStore: petStore
         ),
-        settingsStore: SettingsStore(),
-        statsStore: StatsStore()
+        settingsStore: settingsStore,
+        statsStore: statsStore
     )
     .frame(width: 400, height: 800)
 }
