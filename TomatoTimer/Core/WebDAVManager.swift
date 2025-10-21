@@ -223,7 +223,7 @@ class WebDAVManager: ObservableObject {
     
     private func parseWebDAVResponse(data: Data, basePath: String) throws -> [WebDAVItem] {
         // 简化的 XML 解析（实际应使用 XMLParser）
-        var items: [WebDAVItem] = []
+        let items: [WebDAVItem] = []
         
         // 这里需要实现完整的 WebDAV XML 解析
         // 暂时返回空数组，后续完善

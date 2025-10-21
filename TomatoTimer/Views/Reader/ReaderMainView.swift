@@ -119,7 +119,7 @@ struct LocalFilesView: View {
             Text("本地文件")
                 .font(.headline)
             
-            Text("从"文件"App 打开 TXT 文件")
+            Text("从文件 App 打开 TXT 文件")
                 .font(.subheadline)
                 .foregroundColor(.secondary)
         }

@@ -14,7 +14,7 @@ class EncodingDetector {
         (.utf16, "UTF-16"),
         (.utf16BigEndian, "UTF-16 BE"),
         (.utf16LittleEndian, "UTF-16 LE"),
-        (.gb_18030_2000, "GB18030"),
+        (.init(rawValue: CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(CFStringEncodings.GB_18030_2000.rawValue))), "GB18030"),
         (.init(rawValue: CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(CFStringEncodings.big5.rawValue))), "Big5"),
         (.shiftJIS, "Shift-JIS"),
         (.isoLatin1, "ISO-8859-1"),
