@@ -167,8 +167,15 @@ class GameStore: ObservableObject {
     }
     
     // MARK: - Game Stats Management
-    func recordGamePlay(_ record: GameRecord) {
+    func recordGamePlay(_ record: GameRecord) -> Bool {
         gameStats.resetDailyCountsIfNeeded()
+        
+        // 检查是否超出每日限制
+        guard gameStats.canPlayToday(record.gameType) else {
+            // 已达到每日限制，不记录也不给奖励
+            return false
+        }
+        
         gameStats.recordGame(record)
         
         addCoins(
@@ -179,6 +186,7 @@ class GameStore: ObservableObject {
         
         saveData()
         checkAchievements()
+        return true
     }
     
     func canPlayGame(_ gameType: GameType) -> Bool {

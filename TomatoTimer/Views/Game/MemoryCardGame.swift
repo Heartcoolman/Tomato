@@ -327,7 +327,8 @@ struct MemoryCardGame: View {
             coinsEarned: coinsEarned,
             duration: 90 - Double(timeRemaining)
         )
-        gameStore.recordGamePlay(record)
+        // 记录游戏结果，如果超出每日限制则不给奖励
+        _ = gameStore.recordGamePlay(record)
     }
 }
 
