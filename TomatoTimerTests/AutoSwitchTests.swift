@@ -17,7 +17,14 @@ final class AutoSwitchTests: XCTestCase {
     override func setUp() async throws {
         settingsStore = SettingsStore()
         statsStore = StatsStore()
-        timerEngine = TimerEngine(settingsStore: settingsStore, statsStore: statsStore)
+        let gameStore = GameStore()
+        let petStore = PetStore()
+        timerEngine = TimerEngine(
+            settingsStore: settingsStore,
+            statsStore: statsStore,
+            gameStore: gameStore,
+            petStore: petStore
+        )
         
         // 启用自动切换
         settingsStore.autoSwitch = true

@@ -153,19 +153,28 @@ struct ModeSegment: View {
 // MARK: - Preview
 
 #Preview {
-    VStack(spacing: 40) {
+    let settingsStore = SettingsStore()
+    let statsStore = StatsStore()
+    let gameStore = GameStore()
+    let petStore = PetStore()
+    
+    return VStack(spacing: 40) {
         MinimalModeSelector(
             timerEngine: TimerEngine(
-                settingsStore: SettingsStore(),
-                statsStore: StatsStore()
+                settingsStore: settingsStore,
+                statsStore: statsStore,
+                gameStore: gameStore,
+                petStore: petStore
             ),
             isDisabled: false
         )
         
         MinimalModeSelector(
             timerEngine: TimerEngine(
-                settingsStore: SettingsStore(),
-                statsStore: StatsStore()
+                settingsStore: settingsStore,
+                statsStore: statsStore,
+                gameStore: gameStore,
+                petStore: petStore
             ),
             isDisabled: true
         )

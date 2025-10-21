@@ -9,6 +9,8 @@ import SwiftUI
 
 enum NavigationItem: String, CaseIterable, Identifiable {
     case timer = "计时器"
+    case pet = "宠物"
+    case achievements = "成就"
     case history = "历史"
     case settings = "设置"
     
@@ -17,6 +19,8 @@ enum NavigationItem: String, CaseIterable, Identifiable {
     var icon: String {
         switch self {
         case .timer: return "timer"
+        case .pet: return "pawprint.fill"
+        case .achievements: return "trophy.fill"
         case .history: return "chart.bar.fill"
         case .settings: return "gearshape.fill"
         }
@@ -77,8 +81,17 @@ struct MainView: View {
             TimerView(
                 timerEngine: timerEngine,
                 settingsStore: coordinator.getSettingsStore(),
-                statsStore: coordinator.getStatsStore()
+                statsStore: coordinator.getStatsStore(),
+                gameStore: coordinator.getGameStore(),
+                petStore: coordinator.getPetStore()
             )
+        case .pet:
+            PetView(
+                petStore: coordinator.getPetStore(),
+                gameStore: coordinator.getGameStore()
+            )
+        case .achievements:
+            AchievementView(gameStore: coordinator.getGameStore())
         case .history:
             HistoryView(statsStore: coordinator.getStatsStore())
         case .settings:
