@@ -1,6 +1,6 @@
 # 🍅 番茄工作法计时器
 
-极简的番茄工作法计时器，专为 iPadOS 17+ 设计。
+极简的番茄工作法计时器，专为 iPadOS 26+ 设计。
 
 ## ✨ 功能特性
 
@@ -84,7 +84,7 @@
 
 ## 🛠️ 技术栈
 
-- **平台**：iPadOS 17.0+
+- **平台**：iPadOS 26.0+
 - **框架**：SwiftUI、Combine
 - **功能**：UserNotifications、AVFoundation、UIKit (Haptics)
 - **架构**：MVVM + Actor 并发
