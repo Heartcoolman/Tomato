@@ -187,8 +187,8 @@ class PetStore: ObservableObject {
             
             showLevelUp = true
             
-            // 检查新技能解锁
-            unlockSkillsForLevel(pet.level)
+            // 检查新技能解锁（直接在本地副本上操作）
+            unlockSkillsForLevel(&pet, level: pet.level)
             
             // 检查进化
             let newStage = EvolutionStage.fromLevel(pet.level)
@@ -202,17 +202,13 @@ class PetStore: ObservableObject {
         savePet()
     }
     
-    private func unlockSkillsForLevel(_ level: Int) {
-        guard var pet = currentPet else { return }
-        
+    private func unlockSkillsForLevel(_ pet: inout VirtualPet, level: Int) {
+        // 直接修改传入的pet引用，避免数据覆盖问题
         for skill in PetSkill.allSkills {
             if skill.unlockLevel == level && !pet.unlockedSkills.contains(skill.id) {
                 pet.unlockedSkills.append(skill.id)
             }
         }
-        
-        currentPet = pet
-        savePet()
     }
     
     func dismissLevelUp() {
