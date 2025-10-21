@@ -131,7 +131,7 @@ struct DockButton: View {
             .contentShape(Rectangle())
         }
         .buttonStyle(PlainButtonStyle())
-        .onLongPressGesture(minimumDistance: 0, pressing: { pressing in
+        .onLongPressGesture(maximumDistance: 0, pressing: { pressing in
             withAnimation(.elasticButton) {
                 isPressed = pressing
             }
@@ -148,7 +148,7 @@ struct DockButton: View {
         }
     }
     
-    private var iconBackgroundGradient: LinearGradient {
+    private var iconBackgroundGradient: some ShapeStyle {
         GradientLibrary.primaryButton.opacity(0.15)
     }
     
@@ -222,7 +222,7 @@ struct CompactDockButton: View {
 // MARK: - Preview
 
 #Preview("Standard Dock") {
-    @Previewable @State var selectedItem: DockItem = .timer
+    @State var selectedItem: DockItem = .timer
     
     return VStack {
         Spacer()
@@ -238,7 +238,7 @@ struct CompactDockButton: View {
 }
 
 #Preview("Compact Dock") {
-    @Previewable @State var selectedItem: DockItem = .pet
+    @State var selectedItem: DockItem = .pet
     
     return VStack {
         Spacer()

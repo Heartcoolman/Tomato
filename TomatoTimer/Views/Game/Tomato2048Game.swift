@@ -313,7 +313,7 @@ struct Tomato2048Game: View {
     }
     
     private func mergeLine(_ line: [Int]) -> (line: [Int], moved: Bool, scoreGain: Int) {
-        var result = line.filter { $0 != 0 }
+        let result = line.filter { $0 != 0 }
         var merged = [Int]()
         var moved = false
         var scoreGain = 0

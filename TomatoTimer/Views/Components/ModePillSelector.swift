@@ -82,7 +82,7 @@ struct ModePill: View {
         .buttonStyle(PlainButtonStyle())
         .disabled(isDisabled)
         .opacity(isDisabled ? 0.6 : 1.0)
-        .onLongPressGesture(minimumDistance: 0, pressing: { pressing in
+        .onLongPressGesture(maximumDistance: 0, pressing: { pressing in
             withAnimation(.elasticButton) {
                 isPressed = pressing
             }

@@ -346,13 +346,7 @@ struct TrailParticleEffect: View {
         let particleColors = type.defaultColors
         let particleCount = 10
         
-        particles = (0..<particleCount).map { index in
-            let progress = CGFloat(index) / CGFloat(particleCount)
-            let position = CGPoint(
-                x: from.x + (to.x - from.x) * progress,
-                y: from.y + (to.y - from.y) * progress
-            )
-            
+        particles = (0..<particleCount).map { _ in
             return Particle(
                 position: from,
                 velocity: .zero,

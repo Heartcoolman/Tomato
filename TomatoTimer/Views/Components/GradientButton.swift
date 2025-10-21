@@ -103,7 +103,7 @@ struct GradientButton: View {
             .scaleEffect(isPressed ? 0.96 : 1.0)
         }
         .buttonStyle(PlainButtonStyle())
-        .onLongPressGesture(minimumDistance: 0, pressing: { pressing in
+        .onLongPressGesture(maximumDistance: 0, pressing: { pressing in
             withAnimation(.elasticButton) {
                 isPressed = pressing
             }
@@ -235,7 +235,7 @@ struct CompactGradientButton: View {
             )
         }
         .buttonStyle(PlainButtonStyle())
-        .onLongPressGesture(minimumDistance: 0, pressing: { pressing in
+        .onLongPressGesture(maximumDistance: 0, pressing: { pressing in
             withAnimation(.quick) {
                 isPressed = pressing
             }
@@ -284,7 +284,7 @@ struct IconGradientButton: View {
                 )
         }
         .buttonStyle(PlainButtonStyle())
-        .onLongPressGesture(minimumDistance: 0, pressing: { pressing in
+        .onLongPressGesture(maximumDistance: 0, pressing: { pressing in
             withAnimation(.elasticButton) {
                 isPressed = pressing
             }
