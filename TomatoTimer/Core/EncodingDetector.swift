@@ -95,7 +95,8 @@ class EncodingDetector {
         }
         
         // 检查是否包含常见标点符号
-        let punctuationCount = string.filter { "。，、；：？！""''（）《》【】".contains($0) }.count
+        let punctuationMarks = "。，、；：？！\"'（）《》【】"
+        let punctuationCount = string.filter { punctuationMarks.contains($0) }.count
         if punctuationCount > 0 {
             confidence += Float(punctuationCount) / Float(string.count) * 0.2
         }
