@@ -94,6 +94,44 @@ extension Color {
     static let glassShadow = Color.black.opacity(0.1)
     static let glassShadowStrong = Color.black.opacity(0.15)
     
+    // MARK: - Modern Gradient Colors (玻璃态风格)
+    
+    /// 现代蓝色渐变色
+    static let modernBlue1 = Color(hex: "#667EEA")
+    static let modernBlue2 = Color(hex: "#764BA2")
+    
+    /// 现代粉色渐变色
+    static let modernPink1 = Color(hex: "#F093FB")
+    static let modernPink2 = Color(hex: "#F5576C")
+    
+    /// 现代绿色渐变色
+    static let modernGreen1 = Color(hex: "#4FACFE")
+    static let modernGreen2 = Color(hex: "#00F2FE")
+    
+    /// 现代紫色渐变色
+    static let modernPurple1 = Color(hex: "#A8EDEA")
+    static let modernPurple2 = Color(hex: "#6DD5ED")
+    
+    /// 现代橙色渐变色
+    static let modernOrange1 = Color(hex: "#FF9A8B")
+    static let modernOrange2 = Color(hex: "#FF6A88")
+    
+    /// 现代黄色渐变色
+    static let modernYellow1 = Color(hex: "#FDEB71")
+    static let modernYellow2 = Color(hex: "#F8D800")
+    
+    /// 金色渐变色
+    static let gold1 = Color(hex: "#FFD700")
+    static let gold2 = Color(hex: "#FFA500")
+    
+    /// 银色渐变色
+    static let silver1 = Color(hex: "#E8E8E8")
+    static let silver2 = Color(hex: "#C0C0C0")
+    
+    /// 铜色渐变色
+    static let bronze1 = Color(hex: "#CD7F32")
+    static let bronze2 = Color(hex: "#A0522D")
+    
     // MARK: - Gradient Presets
     
     /// 预定义渐变
@@ -125,6 +163,57 @@ extension Color {
         ],
         startPoint: .top,
         endPoint: .bottom
+    )
+    
+    // MARK: - Modern Gradients
+    
+    /// 现代蓝色渐变
+    static let modernBlueGradient = LinearGradient(
+        colors: [modernBlue1, modernBlue2],
+        startPoint: .topLeading,
+        endPoint: .bottomTrailing
+    )
+    
+    /// 现代粉色渐变
+    static let modernPinkGradient = LinearGradient(
+        colors: [modernPink1, modernPink2],
+        startPoint: .topLeading,
+        endPoint: .bottomTrailing
+    )
+    
+    /// 现代绿色渐变
+    static let modernGreenGradient = LinearGradient(
+        colors: [modernGreen1, modernGreen2],
+        startPoint: .topLeading,
+        endPoint: .bottomTrailing
+    )
+    
+    /// 现代紫色渐变
+    static let modernPurpleGradient = LinearGradient(
+        colors: [modernPurple1, modernPurple2],
+        startPoint: .topLeading,
+        endPoint: .bottomTrailing
+    )
+    
+    /// 金色渐变
+    static let goldGradient = LinearGradient(
+        colors: [gold1, gold2],
+        startPoint: .topLeading,
+        endPoint: .bottomTrailing
+    )
+    
+    /// 银色渐变
+    static let silverGradient = LinearGradient(
+        colors: [silver1, silver2],
+        startPoint: .topLeading,
+        endPoint: .bottomTrailing
+    )
+    
+    /// 铜色渐变
+    static let bronzeGradient = LinearGradient(
+        colors: [bronze1, bronze2],
+        startPoint: .topLeading,
+        endPoint: .bottomTrailing
     )
     
     // MARK: - Helper Methods
