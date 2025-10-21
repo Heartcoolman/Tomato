@@ -40,7 +40,7 @@ struct ProfessionalTimeDisplay: View {
                 .opacity(DesignTokens.Opacity.secondary)
         }
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("Remaining time")
+        .accessibilityLabel("剩余时间")
         .accessibilityValue(accessibilityTimeString)
         .onAppear {
             updateAppearance()
@@ -136,7 +136,7 @@ struct ProfessionalTimeDisplay: View {
     private var accessibilityTimeString: String {
         let minutes = Int(remainingTime) / 60
         let seconds = Int(remainingTime) % 60
-        return "\(minutes) minutes and \(seconds) seconds remaining"
+        return "剩余 \(minutes) 分钟 \(seconds) 秒"
     }
 }
 

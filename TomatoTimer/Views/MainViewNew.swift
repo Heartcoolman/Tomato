@@ -78,12 +78,12 @@ struct MainViewNew: View {
                     .font(.system(size: 28, weight: .semibold))
                     .foregroundColor(.primary)
                 
-                Text("Tomato")
+                Text("番茄")
                     .font(.system(size: 28, weight: .bold, design: .rounded))
                     .foregroundColor(.neutralGray)
             }
             
-            Text("Focus Timer")
+            Text("专注计时器")
                 .font(DesignTokens.Typography.caption)
                 .foregroundColor(.neutralMid)
         }
@@ -97,11 +97,11 @@ struct MainViewNew: View {
                     .foregroundColor(.warning)
                 
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("\(coordinator.getStatsStore().currentStreak) day streak")
+                    Text("连续 \(coordinator.getStatsStore().currentStreak) 天")
                         .font(.system(size: 13, weight: .semibold))
                         .foregroundColor(.neutralGray)
                     
-                    Text("Keep it going!")
+                    Text("继续保持！")
                         .font(.system(size: 11))
                         .foregroundColor(.neutralMid)
                 }

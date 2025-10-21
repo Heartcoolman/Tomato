@@ -55,7 +55,7 @@ struct FloatingStatsCard: View {
     private var header: some View {
         HStack {
             Label {
-                Text("Today's Progress")
+                Text("今日进度")
                     .font(DesignTokens.Typography.title3)
                     .foregroundColor(.neutralGray)
             } icon: {
@@ -84,7 +84,7 @@ struct FloatingStatsCard: View {
             StatItem(
                 icon: "circle.fill",
                 value: "\(todayCompletedSessions)",
-                label: "Completed",
+                label: "已完成",
                 color: .primary
             )
             
@@ -94,7 +94,7 @@ struct FloatingStatsCard: View {
             StatItem(
                 icon: "clock.fill",
                 value: "\(totalMinutesToday)",
-                label: "Minutes",
+                label: "分钟",
                 color: .secondary
             )
             
@@ -104,7 +104,7 @@ struct FloatingStatsCard: View {
             StatItem(
                 icon: "flame.fill",
                 value: "\(streakDays)",
-                label: "Streak",
+                label: "连续",
                 color: .warning
             )
         }
@@ -113,7 +113,7 @@ struct FloatingStatsCard: View {
     private var progressSection: some View {
         VStack(alignment: .leading, spacing: DesignTokens.Spacing.xs) {
             HStack {
-                Text("Daily Goal")
+                Text("每日目标")
                     .font(DesignTokens.Typography.caption)
                     .foregroundColor(.neutralMid)
                 

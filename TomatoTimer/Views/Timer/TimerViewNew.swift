@@ -32,12 +32,12 @@ struct TimerViewNew: View {
         .onChange(of: timerEngine.state) { oldState, newState in
             handleStateChange(from: oldState, to: newState)
         }
-        .alert("Completed!", isPresented: $showingCompletionAlert) {
-            Button("OK") {
+        .alert("完成！", isPresented: $showingCompletionAlert) {
+            Button("好的") {
                 showingCompletionAlert = false
             }
         } message: {
-            Text("\(timerEngine.currentMode.displayName) session completed")
+            Text("\(timerEngine.currentMode.displayName)时间结束")
         }
     }
     
@@ -168,7 +168,7 @@ struct TimerViewNew: View {
                         .font(.system(size: DesignTokens.IconSize.medium))
                         .foregroundColor(.primary)
                     
-                    Text("Quick Settings")
+                    Text("快速设置")
                         .font(DesignTokens.Typography.title3)
                         .foregroundColor(.neutralGray)
                     
@@ -180,21 +180,21 @@ struct TimerViewNew: View {
                 // Essential toggles
                 QuickToggle(
                     icon: "bell.fill",
-                    title: "Notifications",
+                    title: "通知",
                     isOn: $settingsStore.notificationsEnabled,
                     color: .primary
                 )
                 
                 QuickToggle(
                     icon: "speaker.wave.2.fill",
-                    title: "Sound",
+                    title: "声音",
                     isOn: $settingsStore.soundEnabled,
                     color: .secondary
                 )
                 
                 QuickToggle(
                     icon: "arrow.right.arrow.left.circle.fill",
-                    title: "Auto Switch",
+                    title: "自动切换",
                     isOn: $settingsStore.autoSwitch,
                     color: .success
                 )

@@ -38,13 +38,13 @@ struct SettingsViewNew: View {
             }
         }
         .background(Color.backgroundGradient.ignoresSafeArea())
-        .alert("Reset Settings", isPresented: $showingResetAlert) {
-            Button("Cancel", role: .cancel) { }
-            Button("Reset", role: .destructive) {
+        .alert("恢复默认设置", isPresented: $showingResetAlert) {
+            Button("取消", role: .cancel) { }
+            Button("恢复", role: .destructive) {
                 settingsStore.resetToDefaults()
             }
         } message: {
-            Text("This will restore all settings to their default values. This action cannot be undone.")
+            Text("这将恢复所有设置到默认值。此操作无法撤销。")
         }
     }
     
@@ -52,11 +52,11 @@ struct SettingsViewNew: View {
     
     private var header: some View {
         VStack(alignment: .leading, spacing: DesignTokens.Spacing.xxs) {
-            Text("Settings")
+            Text("设置")
                 .font(DesignTokens.Typography.largeTitle)
                 .foregroundColor(.neutralGray)
             
-            Text("Customize your experience")
+            Text("定制你的体验")
                 .font(DesignTokens.Typography.caption)
                 .foregroundColor(.neutralMid)
         }
@@ -67,7 +67,7 @@ struct SettingsViewNew: View {
     
     private var durationSection: some View {
         VStack(alignment: .leading, spacing: DesignTokens.Spacing.md) {
-            Text("Session Durations")
+            Text("会话时长")
                 .font(DesignTokens.Typography.title3)
                 .foregroundColor(.neutralGray)
             
@@ -75,7 +75,7 @@ struct SettingsViewNew: View {
                 VStack(spacing: 0) {
                     DurationSettingRow(
                         icon: "💼",
-                        title: "Work Session",
+                        title: "工作时长",
                         value: $settingsStore.workDurationMinutes,
                         range: 1...60,
                         color: .workMode
@@ -86,7 +86,7 @@ struct SettingsViewNew: View {
                     
                     DurationSettingRow(
                         icon: "☕️",
-                        title: "Short Break",
+                        title: "短休息",
                         value: $settingsStore.shortBreakDurationMinutes,
                         range: 1...30,
                         color: .shortBreakMode
@@ -97,7 +97,7 @@ struct SettingsViewNew: View {
                     
                     DurationSettingRow(
                         icon: "🌴",
-                        title: "Long Break",
+                        title: "长休息",
                         value: $settingsStore.longBreakDurationMinutes,
                         range: 1...60,
                         color: .longBreakMode
@@ -111,7 +111,7 @@ struct SettingsViewNew: View {
     
     private var preferencesSection: some View {
         VStack(alignment: .leading, spacing: DesignTokens.Spacing.md) {
-            Text("Preferences")
+            Text("偏好设置")
                 .font(DesignTokens.Typography.title3)
                 .foregroundColor(.neutralGray)
             
@@ -119,8 +119,8 @@ struct SettingsViewNew: View {
                 // Auto switch
                 PreferenceCard(
                     icon: "arrow.right.arrow.left.circle.fill",
-                    title: "Auto Switch",
-                    description: "Automatically switch to next session when completed",
+                    title: "自动切换",
+                    description: "完成后自动切换到下一个阶段",
                     isOn: $settingsStore.autoSwitch,
                     color: .success
                 )
@@ -128,8 +128,8 @@ struct SettingsViewNew: View {
                 // Auto start
                 PreferenceCard(
                     icon: "play.circle.fill",
-                    title: "Auto Start",
-                    description: "Automatically start timer after switching",
+                    title: "自动开始",
+                    description: "切换后自动开始计时",
                     isOn: $settingsStore.autoStart,
                     color: .secondary
                 )
@@ -137,8 +137,8 @@ struct SettingsViewNew: View {
                 // Notifications
                 PreferenceCard(
                     icon: "bell.circle.fill",
-                    title: "Notifications",
-                    description: "Show notifications when session completes",
+                    title: "通知提醒",
+                    description: "会话完成时显示通知",
                     isOn: $settingsStore.notificationsEnabled,
                     color: .primary
                 )
@@ -146,8 +146,8 @@ struct SettingsViewNew: View {
                 // Sound
                 PreferenceCard(
                     icon: "speaker.wave.2.circle.fill",
-                    title: "Sound Effects",
-                    description: "Play sound when session completes",
+                    title: "声音效果",
+                    description: "会话完成时播放声音",
                     isOn: $settingsStore.soundEnabled,
                     color: .warning
                 )
@@ -155,8 +155,8 @@ struct SettingsViewNew: View {
                 // Haptics
                 PreferenceCard(
                     icon: "hand.tap.fill",
-                    title: "Haptic Feedback",
-                    description: "Provide haptic feedback for actions",
+                    title: "触觉反馈",
+                    description: "操作时提供触觉反馈",
                     isOn: $settingsStore.hapticsEnabled,
                     color: .secondary
                 )
@@ -164,8 +164,8 @@ struct SettingsViewNew: View {
                 // Keep screen on
                 PreferenceCard(
                     icon: "sun.max.circle.fill",
-                    title: "Keep Screen On",
-                    description: "Prevent screen from sleeping during sessions",
+                    title: "保持屏幕常亮",
+                    description: "会话期间防止屏幕休眠",
                     isOn: $settingsStore.keepScreenOn,
                     color: .warning
                 )
@@ -179,13 +179,13 @@ struct SettingsViewNew: View {
         VStack(spacing: DesignTokens.Spacing.sm) {
             ProfessionalButton(
                 icon: "arrow.counterclockwise.circle.fill",
-                title: "Reset to Defaults",
+                title: "恢复默认设置",
                 style: .tertiary
             ) {
                 showingResetAlert = true
             }
             
-            Text("This will restore all settings to their original values")
+            Text("这将恢复所有设置到初始值")
                 .font(.system(size: 12))
                 .foregroundColor(.neutralMid)
                 .multilineTextAlignment(.center)
@@ -201,18 +201,18 @@ struct SettingsViewNew: View {
                     .font(.system(size: 48))
                     .foregroundColor(.primary)
                 
-                Text("Pomodoro Timer")
+                Text("番茄计时器")
                     .font(DesignTokens.Typography.title3)
                     .foregroundColor(.neutralGray)
                 
-                Text("Version 2.0.0")
+                Text("版本 2.0.0")
                     .font(DesignTokens.Typography.caption)
                     .foregroundColor(.neutralMid)
                 
                 Divider()
                     .padding(.vertical, DesignTokens.Spacing.xs)
                 
-                Text("Built with iPadOS 26 Liquid Glass Design")
+                Text("采用 iPadOS 26 Liquid Glass 设计")
                     .font(.system(size: 11))
                     .foregroundColor(.neutralLight)
                     .multilineTextAlignment(.center)
