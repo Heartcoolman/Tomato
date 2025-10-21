@@ -108,6 +108,18 @@ extension Animation {
         .spring(response: 0.3, dampingFraction: 0.85, blendDuration: 0.15)
     }
     
+    // MARK: - Button Animations
+    
+    /// 弹性按钮动画 - 用于按钮点击反馈
+    static var elasticButton: Animation {
+        .spring(response: 0.3, dampingFraction: 0.7)
+    }
+    
+    /// 快速动画 - 用于即时反馈
+    static var quick: Animation {
+        .easeOut(duration: 0.2)
+    }
+    
     // MARK: - Glass Morphing
     
     /// 玻璃态变形 - 用于 Liquid Glass 元素的变形

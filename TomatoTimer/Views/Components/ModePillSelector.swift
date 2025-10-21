@@ -29,10 +29,8 @@ struct ModePillSelector: View {
                             withAnimation(.elasticButton) {
                                 timerEngine.switchMode(to: mode)
                             }
-                            if let settingsStore = timerEngine.value(forKey: "settingsStore") as? SettingsStore,
-                               settingsStore.hapticsEnabled {
-                                HapticManager.shared.playSelection()
-                            }
+                            // 触觉反馈由调用方处理
+                            HapticManager.shared.playSelection()
                         }
                     }
                 )
