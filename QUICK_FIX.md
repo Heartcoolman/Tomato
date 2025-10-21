@@ -65,11 +65,21 @@
 ## 📊 提交历史
 
 ```
+0262414 - fix: 修复 GitHub Actions 工作流
+81f7174 - docs: 添加修复说明文档
 d3c4ea0 - docs: 更新文档说明文件已自动添加
 da096ed - fix: 将阅读器文件添加到 Xcode 项目
 7e53d8a - docs: 添加 Xcode 文件添加指南
 5f72146 - feat: 集成 TXT 阅读器功能
 ```
+
+## 🔧 额外修复
+
+### GitHub Actions 工作流
+- ✅ 动态查找 .app 文件（不再硬编码名称）
+- ✅ 添加错误处理和调试信息
+- ✅ 支持 feature 分支和 Pull Request 构建
+- ✅ 修复了 "cannot find TxtReader.app" 错误
 
 ## 🚀 下一步
 
