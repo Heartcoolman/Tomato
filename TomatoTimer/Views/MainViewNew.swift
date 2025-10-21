@@ -124,6 +124,17 @@ struct MainViewNew: View {
             )
             .navigationTitle("")
             
+        case .pet:
+            PetView(
+                petStore: coordinator.getPetStore(),
+                gameStore: coordinator.getGameStore()
+            )
+            .navigationTitle(selectedItem.rawValue)
+            
+        case .achievements:
+            AchievementView(gameStore: coordinator.getGameStore())
+                .navigationTitle(selectedItem.rawValue)
+            
         case .history:
             HistoryViewNew(statsStore: coordinator.getStatsStore())
                 .navigationTitle(selectedItem.rawValue)
