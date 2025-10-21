@@ -66,6 +66,12 @@
 		A141 /* FruitCatchGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A142; };
 		A143 /* Tomato2048Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = A144; };
 		A145 /* MemoryCardGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A146; };
+		A147 /* GradientLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = A148; };
+		A149 /* GradientButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A150; };
+		A151 /* StatusCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A152; };
+		A153 /* ModePillSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = A154; };
+		A155 /* ParticleSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A156; };
+		A157 /* DockNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A158; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -141,6 +147,12 @@
 		A142 /* FruitCatchGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitCatchGame.swift; sourceTree = "<group>"; };
 		A144 /* Tomato2048Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tomato2048Game.swift; sourceTree = "<group>"; };
 		A146 /* MemoryCardGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCardGame.swift; sourceTree = "<group>"; };
+		A148 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientLibrary.swift; sourceTree = "<group>"; };
+		A150 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientButton.swift; sourceTree = "<group>"; };
+		A152 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusCard.swift; sourceTree = "<group>"; };
+		A154 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModePillSelector.swift; sourceTree = "<group>"; };
+		A156 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleSystem.swift; sourceTree = "<group>"; };
+		A158 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockNavigationBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,31 +245,44 @@
 			path = Stores;
 			sourceTree = "<group>";
 		};
-		VIEWS = {
-			isa = PBXGroup;
-			children = (
-				A012,
-				A029,
-				COMPONENTS,
-				TIMER,
-				HISTORY,
-				SETTINGS,
-				PET,
-				ACHIEVEMENT,
-				GAME,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		COMPONENTS = {
-			isa = PBXGroup;
-			children = (
-				A028,
-			);
-			path = Components;
-			sourceTree = "<group>";
-		};
-		TIMER = {
+	VIEWS = {
+		isa = PBXGroup;
+		children = (
+			A012,
+			A029,
+			COMPONENTS,
+			NAVIGATION,
+			TIMER,
+			HISTORY,
+			SETTINGS,
+			PET,
+			ACHIEVEMENT,
+			GAME,
+		);
+		path = Views;
+		sourceTree = "<group>";
+	};
+	COMPONENTS = {
+		isa = PBXGroup;
+		children = (
+			A028,
+			A150,
+			A152,
+			A154,
+			A156,
+		);
+		path = Components;
+		sourceTree = "<group>";
+	};
+	NAVIGATION = {
+		isa = PBXGroup;
+		children = (
+			A158,
+		);
+		path = Navigation;
+		sourceTree = "<group>";
+	};
+	TIMER = {
 			isa = PBXGroup;
 			children = (
 				A013,
@@ -292,18 +317,19 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
-		UTILITIES = {
-			isa = PBXGroup;
-			children = (
-				A019,
-				A020,
-				A021,
-				A026,
-				A027,
-			);
-			path = Utilities;
-			sourceTree = "<group>";
-		};
+	UTILITIES = {
+		isa = PBXGroup;
+		children = (
+			A019,
+			A020,
+			A021,
+			A026,
+			A027,
+			A148,
+		);
+		path = Utilities;
+		sourceTree = "<group>";
+	};
 		PET = {
 			isa = PBXGroup;
 			children = (
@@ -496,7 +522,13 @@
 				A141,
 				A143,
 				A145,
-			);
+							A147 /* GradientLibrary.swift in Sources */,
+				A149 /* GradientButton.swift in Sources */,
+				A151 /* StatusCard.swift in Sources */,
+				A153 /* ModePillSelector.swift in Sources */,
+				A155 /* ParticleSystem.swift in Sources */,
+				A157 /* DockNavigationBar.swift in Sources */,
+);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		TESTSOURCES = {
