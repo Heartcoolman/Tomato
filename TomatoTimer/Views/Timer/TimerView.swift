@@ -11,16 +11,25 @@ struct TimerView: View {
     @ObservedObject var timerEngine: TimerEngine
     @ObservedObject var settingsStore: SettingsStore
     @ObservedObject var statsStore: StatsStore
+    @ObservedObject var gameStore: GameStore
+    @ObservedObject var petStore: PetStore
     
     @State private var showingCompletionAlert = false
+    @State private var showGameCenter = false
+    @State private var showCoinAnimation = false
+    @State private var coinAnimationAmount = 0
     @Environment(\.accessibilityReduceMotion) var reduceMotion
     @Environment(\.scenePhase) var scenePhase
     
     var body: some View {
-        ScrollView {
-            VStack(spacing: 32) {
-                // 模式选择器
-                HStack {
+        ZStack {
+            ScrollView {
+                VStack(spacing: 32) {
+                    // 顶部栏：番茄币 + 宠物 widget
+                    topBar
+                    
+                    // 模式选择器
+                    HStack {
                     ForEach(TimerMode.allCases) { mode in
                         ModeButton(
                             mode: mode,
@@ -84,11 +93,11 @@ struct TimerView: View {
                         insertion: .move(edge: .bottom).combined(with: .opacity),
                         removal: .move(edge: .top).combined(with: .opacity)
                     ))
+                }
+                .padding(.vertical)
             }
-            .padding(.vertical)
             .animation(.spring(response: 0.6, dampingFraction: 0.8), value: timerEngine.state)
-        }
-        .background(
+            .background(
             Color.lightYellow
                 .ignoresSafeArea()
                 .overlay(
@@ -117,6 +126,165 @@ struct TimerView: View {
         } message: {
             Text("\(timerEngine.currentMode.displayName)时间结束")
         }
+        .onChange(of: gameStore.coinBalance) { oldValue, newValue in
+            if newValue > oldValue {
+                coinAnimationAmount = newValue - oldValue
+                showCoinAnimation = true
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    showCoinAnimation = false
+                }
+            }
+        }
+        .sheet(isPresented: $showGameCenter) {
+            GameCenterView(gameStore: gameStore)
+        }
+        
+        // 金币飞入动画
+        if showCoinAnimation {
+            VStack {
+                Spacer()
+                HStack {
+                    Spacer()
+                    CoinAnimationView(amount: coinAnimationAmount)
+                        .padding()
+                }
+            }
+        }
+        
+        // 成就解锁动画
+        if let achievement = gameStore.showAchievementUnlock {
+            AchievementUnlockView(achievement: achievement) {
+                gameStore.dismissAchievementUnlock()
+            }
+        }
+        
+        // 宠物升级动画
+        if petStore.showLevelUp {
+            levelUpOverlay
+        }
+        
+        // 宠物进化动画
+        if petStore.showEvolution {
+            evolutionOverlay
+        }
+        
+        // 宠物庆祝动画
+        if petStore.showCelebration {
+            celebrationOverlay
+        }
+    }
+    
+    // MARK: - Top Bar
+    private var topBar: some View {
+        HStack {
+            // 番茄币 widget
+            CoinWidget(gameStore: gameStore)
+            
+            Spacer()
+            
+            // 游戏中心按钮
+            if timerEngine.state == .idle || timerEngine.state == .paused {
+                Button(action: { showGameCenter = true }) {
+                    Image(systemName: "gamecontroller.fill")
+                        .font(.title3)
+                        .foregroundColor(.white)
+                        .padding(8)
+                        .background(Circle().fill(Color.blue))
+                }
+            }
+            
+            // 宠物浮动 widget
+            if petStore.hasPet() {
+                PetFloatingWidget(petStore: petStore)
+            }
+        }
+        .padding(.horizontal)
+    }
+    
+    // MARK: - Overlays
+    private var levelUpOverlay: some View {
+        ZStack {
+            Color.black.opacity(0.7).ignoresSafeArea()
+            
+            VStack(spacing: 24) {
+                Text("🎊")
+                    .font(.system(size: 80))
+                
+                Text("升级了！")
+                    .font(.title.bold())
+                    .foregroundColor(.white)
+                
+                if let pet = petStore.currentPet {
+                    Text("等级 \(pet.level)")
+                        .font(.system(size: 48, weight: .bold))
+                        .foregroundColor(.yellow)
+                }
+                
+                Button(action: {
+                    petStore.dismissLevelUp()
+                }) {
+                    Text("太棒了！")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 32)
+                        .padding(.vertical, 12)
+                        .background(Capsule().fill(Color.tomatoRed))
+                }
+            }
+        }
+        .onAppear {
+            HapticManager.shared.playSuccess()
+        }
+    }
+    
+    private var evolutionOverlay: some View {
+        ZStack {
+            Color.black.opacity(0.7).ignoresSafeArea()
+            
+            VStack(spacing: 24) {
+                Text("✨")
+                    .font(.system(size: 80))
+                
+                Text("进化了！")
+                    .font(.title.bold())
+                    .foregroundColor(.white)
+                
+                if let pet = petStore.currentPet {
+                    VStack(spacing: 12) {
+                        Text(pet.type.emoji)
+                            .font(.system(size: 100))
+                        
+                        Text(pet.evolutionStage.displayName)
+                            .font(.title2.bold())
+                            .foregroundColor(.yellow)
+                    }
+                }
+                
+                Button(action: {
+                    petStore.dismissEvolution()
+                }) {
+                    Text("继续")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 32)
+                        .padding(.vertical, 12)
+                        .background(Capsule().fill(Color.tomatoRed))
+                }
+            }
+        }
+        .onAppear {
+            HapticManager.shared.playSuccess()
+        }
+    }
+    
+    private var celebrationOverlay: some View {
+        FloatingCoinsEffect(count: 10)
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    petStore.dismissCelebration()
+                }
+            }
     }
     
     private var controlButtons: some View {
@@ -1330,7 +1498,9 @@ struct PulsingTimeView: View {
     return TimerView(
         timerEngine: coordinator.getTimerEngine(),
         settingsStore: coordinator.getSettingsStore(),
-        statsStore: coordinator.getStatsStore()
+        statsStore: coordinator.getStatsStore(),
+        gameStore: coordinator.getGameStore(),
+        petStore: coordinator.getPetStore()
     )
 }
 

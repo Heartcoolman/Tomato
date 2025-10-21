@@ -24,11 +24,15 @@ class TimerEngine: ObservableObject {
     
     private let settingsStore: SettingsStore
     private let statsStore: StatsStore
+    private let gameStore: GameStore
+    private let petStore: PetStore
     
     // MARK: - Initialization
-    init(settingsStore: SettingsStore, statsStore: StatsStore) {
+    init(settingsStore: SettingsStore, statsStore: StatsStore, gameStore: GameStore, petStore: PetStore) {
         self.settingsStore = settingsStore
         self.statsStore = statsStore
+        self.gameStore = gameStore
+        self.petStore = petStore
         
         // 从持久化存储恢复状态
         restoreState()
@@ -242,6 +246,40 @@ class TimerEngine: ObservableObject {
             duration: totalDuration
         )
         statsStore.addSession(session)
+        
+        // 游戏化奖励
+        rewardCompletion()
+    }
+    
+    private func rewardCompletion() {
+        // 番茄币奖励（考虑宠物加成）
+        let petBonus = petStore.currentPet?.coinBonusMultiplier ?? 1.0
+        gameStore.rewardCoins(for: currentMode, petBonusMultiplier: petBonus)
+        
+        // 宠物经验
+        if currentMode == .work {
+            petStore.addExperience(amount: 20)
+        } else {
+            petStore.addExperience(amount: 10)
+        }
+        
+        // 检查成就
+        let pomodoroCount = statsStore.sessions.filter { $0.mode == .work }.count
+        let streakDays = statsStore.currentStreak
+        let totalMinutes = statsStore.sessions.reduce(0) { $0 + $1.durationInMinutes }
+        let petLevel = petStore.currentPet?.level ?? 0
+        
+        gameStore.checkAchievements(
+            pomodoroCount: pomodoroCount,
+            streakDays: streakDays,
+            totalMinutes: totalMinutes,
+            petLevel: petLevel
+        )
+        
+        // 宠物庆祝动画
+        if petStore.currentPet?.hasCelebrationSkill == true {
+            petStore.triggerCelebration()
+        }
     }
     
     private func switchToNextMode() {
