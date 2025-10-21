@@ -1,10 +1,14 @@
 # 将新文件添加到 Xcode 项目
 
-## ⚠️ 重要提示
+## ✅ 已完成！
 
-GitHub Actions 构建失败是因为新创建的 Swift 文件还没有添加到 Xcode 项目中。你需要在 Xcode 中手动添加这些文件。
+所有新文件已经自动添加到 Xcode 项目中。GitHub Actions 现在应该可以成功构建了。
 
-## 📋 需要添加的文件列表
+## 📋 已添加的文件
+
+如果 GitHub Actions 仍然失败，请参考下面的手动添加步骤。
+
+## 📋 已添加的文件列表
 
 ### Models（3个文件）
 - `TomatoTimer/Models/Book.swift`
