@@ -134,6 +134,8 @@ class WebDAVManager: ObservableObject {
         var request = URLRequest(url: url)
         request.httpMethod = "PROPFIND"
         request.setValue("0", forHTTPHeaderField: "Depth")
+        request.setValue("application/xml", forHTTPHeaderField: "Content-Type")
+        request.timeoutInterval = 30
         
         // Basic Auth
         let credentials = "\(account.username):\(password)"
@@ -162,7 +164,11 @@ class WebDAVManager: ObservableObject {
             throw WebDAVError.noPassword
         }
         
-        let fullURL = account.serverURL + path
+        // 正确拼接 URL，避免双斜杠
+        let baseURL = account.serverURL.hasSuffix("/") ? String(account.serverURL.dropLast()) : account.serverURL
+        let cleanPath = path.hasPrefix("/") ? path : "/" + path
+        let fullURL = baseURL + cleanPath
+        
         guard let url = URL(string: fullURL) else {
             throw WebDAVError.invalidURL
         }
@@ -170,6 +176,8 @@ class WebDAVManager: ObservableObject {
         var request = URLRequest(url: url)
         request.httpMethod = "PROPFIND"
         request.setValue("1", forHTTPHeaderField: "Depth")
+        request.setValue("application/xml", forHTTPHeaderField: "Content-Type")
+        request.timeoutInterval = 30
         
         // Basic Auth
         let credentials = "\(account.username):\(password)"
@@ -194,13 +202,18 @@ class WebDAVManager: ObservableObject {
             throw WebDAVError.noPassword
         }
         
-        let fullURL = account.serverURL + path
+        // 正确拼接 URL，避免双斜杠
+        let baseURL = account.serverURL.hasSuffix("/") ? String(account.serverURL.dropLast()) : account.serverURL
+        let cleanPath = path.hasPrefix("/") ? path : "/" + path
+        let fullURL = baseURL + cleanPath
+        
         guard let url = URL(string: fullURL) else {
             throw WebDAVError.invalidURL
         }
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
+        request.timeoutInterval = 60
         
         // Basic Auth
         let credentials = "\(account.username):\(password)"
@@ -222,13 +235,141 @@ class WebDAVManager: ObservableObject {
     // MARK: - 辅助方法
     
     private func parseWebDAVResponse(data: Data, basePath: String) throws -> [WebDAVItem] {
-        // 简化的 XML 解析（实际应使用 XMLParser）
-        let items: [WebDAVItem] = []
+        let parser = WebDAVXMLParser(basePath: basePath)
+        return try parser.parse(data: data)
+    }
+}
+
+// MARK: - WebDAV XML 解析器
+
+class WebDAVXMLParser: NSObject, XMLParserDelegate {
+    private var items: [WebDAVItem] = []
+    private var currentElement = ""
+    private var currentHref = ""
+    private var currentSize: Int64?
+    private var currentModifiedDate: Date?
+    private var isDirectory = false
+    private var inPropStat = false
+    private let basePath: String
+    private let dateFormatter = ISO8601DateFormatter()
+    
+    init(basePath: String) {
+        self.basePath = basePath
+        super.init()
+    }
+    
+    func parse(data: Data) throws -> [WebDAVItem] {
+        let parser = XMLParser(data: data)
+        parser.delegate = self
         
-        // 这里需要实现完整的 WebDAV XML 解析
-        // 暂时返回空数组，后续完善
+        if parser.parse() {
+            // 过滤掉当前目录本身和空项
+            return items.filter { !$0.name.isEmpty && $0.path != basePath }
+        } else if let error = parser.parserError {
+            throw error
+        } else {
+            throw WebDAVError.invalidResponse
+        }
+    }
+    
+    // XMLParserDelegate 方法
+    
+    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
+        currentElement = elementName
         
-        return items
+        if elementName == "d:response" || elementName == "response" {
+            // 重置当前项的状态
+            currentHref = ""
+            currentSize = nil
+            currentModifiedDate = nil
+            isDirectory = false
+            inPropStat = false
+        } else if elementName == "d:propstat" || elementName == "propstat" {
+            inPropStat = true
+        }
+    }
+    
+    func parser(_ parser: XMLParser, foundCharacters string: String) {
+        let content = string.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !content.isEmpty else { return }
+        
+        switch currentElement {
+        case "d:href", "href":
+            currentHref += content
+            
+        case "d:getcontentlength", "getcontentlength":
+            if let size = Int64(content) {
+                currentSize = size
+            }
+            
+        case "d:getlastmodified", "getlastmodified":
+            if let date = dateFormatter.date(from: content) {
+                currentModifiedDate = date
+            } else {
+                // 尝试其他日期格式
+                let fallbackFormatter = DateFormatter()
+                fallbackFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss zzz"
+                fallbackFormatter.locale = Locale(identifier: "en_US_POSIX")
+                if let date = fallbackFormatter.date(from: content) {
+                    currentModifiedDate = date
+                }
+            }
+            
+        case "d:resourcetype", "resourcetype":
+            break
+            
+        case "d:collection", "collection":
+            isDirectory = true
+            
+        default:
+            break
+        }
+    }
+    
+    func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
+        if elementName == "d:response" || elementName == "response" {
+            // 完成一个文件/目录的解析
+            if !currentHref.isEmpty {
+                // 解码 URL 编码的路径
+                guard let decodedHref = currentHref.removingPercentEncoding else {
+                    currentElement = ""
+                    return
+                }
+                
+                // 处理完整 URL（如 https://server.com/path/to/file）
+                var pathOnly = decodedHref
+                if let url = URL(string: decodedHref), let path = url.path.isEmpty ? nil : url.path {
+                    pathOnly = path
+                } else if decodedHref.hasPrefix("http://") || decodedHref.hasPrefix("https://") {
+                    // 如果是 URL 但无法解析，尝试手动提取路径
+                    if let pathStart = decodedHref.range(of: "/", options: [], range: decodedHref.index(decodedHref.startIndex, offsetBy: 8)..<decodedHref.endIndex) {
+                        pathOnly = String(decodedHref[pathStart.lowerBound...])
+                    }
+                }
+                
+                // 提取文件/文件夹名称和路径
+                let pathComponents = pathOnly.components(separatedBy: "/").filter { !$0.isEmpty }
+                
+                if let name = pathComponents.last {
+                    // 构建完整路径
+                    let fullPath = "/" + pathComponents.joined(separator: "/") + (isDirectory ? "/" : "")
+                    
+                    let item = WebDAVItem(
+                        name: name,
+                        path: fullPath,
+                        isDirectory: isDirectory,
+                        size: currentSize,
+                        modifiedDate: currentModifiedDate
+                    )
+                    
+                    items.append(item)
+                }
+            }
+        } else if elementName == "d:propstat" || elementName == "propstat" {
+            inPropStat = false
+        }
+        
+        currentElement = ""
     }
 }
 

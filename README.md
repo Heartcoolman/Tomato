@@ -2,6 +2,26 @@
 
 极简的番茄工作法计时器，专为 iPadOS 26+ 设计。
 
+## 🔔 最新更新 (2025-10-22)
+
+### ✅ 重要修复：WebDAV 连接问题已解决
+
+**问题**: TXT 阅读器无法连接 WebDAV 或连接后看不到文件  
+**原因**: WebDAV XML 解析器未实现，始终返回空列表  
+**修复**: 完整实现了 WebDAV PROPFIND 响应解析
+
+**修复内容**:
+- ✅ 实现完整的 WebDAV XML 解析器
+- ✅ 优化 URL 拼接逻辑（避免双斜杠）
+- ✅ 增强服务器兼容性（添加标准请求头）
+- ✅ 支持多种日期格式和路径格式
+- ✅ 处理 URL 编码的中文文件名
+
+**使用指南**: 查看 [WebDAV 故障排查指南](WEBDAV_TROUBLESHOOTING.md)  
+**技术细节**: 查看 [修复总结](WEBDAV_FIX_SUMMARY.md)
+
+---
+
 ## ✨ 功能特性
 
 ### 📚 TXT 阅读器（NEW！）
@@ -345,6 +365,8 @@ MIT License
 
 ### 阅读器文档
 - [QUICK_START_READER.md](QUICK_START_READER.md) - 📖 阅读器 5 分钟快速上手指南（推荐新手）
+- [WEBDAV_TROUBLESHOOTING.md](WEBDAV_TROUBLESHOOTING.md) - 🔧 WebDAV 连接故障排查指南（重要）
+- [WEBDAV_FIX_SUMMARY.md](WEBDAV_FIX_SUMMARY.md) - 📋 WebDAV 修复技术总结
 - [READER_IMPLEMENTATION.md](READER_IMPLEMENTATION.md) - TXT 阅读器技术实现文档
 
 ### 番茄钟文档
@@ -357,13 +379,16 @@ MIT License
 ## 🔮 未来计划
 
 ### 阅读器增强
+- [x] ~~WebDAV XML 解析器~~ ✅ 已完成 (v1.1)
 - [ ] 完善分页算法
-- [ ] 书签和高亮功能
-- [ ] 全文搜索
-- [ ] TTS 语音朗读
+- [ ] 增强书签和高亮功能
+- [ ] 优化全文搜索性能
+- [ ] TTS 语音朗读增强
 - [ ] 词典/翻译集成
 - [ ] Apple Pencil 批注
-- [ ] 阅读统计
+- [ ] 阅读统计和数据可视化
+- [ ] 文件缓存和离线阅读
+- [ ] 阅读进度云同步
 
 ### 番茄钟增强
 - [ ] 白噪音播放
